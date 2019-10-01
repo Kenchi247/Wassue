@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_104240) do
     t.string "last_sign_in_ip"
     t.text "profile_image_id"
     t.boolean "admin", default: false
-    t.string "name", null: false
+    t.string "name"
     t.text "introduction"
     t.integer "score", default: 0, null: false
     t.boolean "status"
