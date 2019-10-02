@@ -10,7 +10,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_104240) do
+ActiveRecord::Schema.define(version: 2019_10_02_025410) do
+
+  create_table "answer_scores", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "answer_id"
+    t.integer "answer_score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.text "answer_content"
+    t.boolean "best_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "answer_id"
+    t.text "answer_comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "example_scores", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "example_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "examples", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "example_title"
+    t.text "example_content"
+    t.text "example_answer"
+    t.boolean "example_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_scores", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "question_status", default: "未回答"
+    t.text "premise"
+    t.text "error"
+    t.text "try"
+    t.text "content"
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
