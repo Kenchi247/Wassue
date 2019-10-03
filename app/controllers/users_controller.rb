@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @questions = Question.where(user_id: current_user.id).reverse_order
   end
 
   private

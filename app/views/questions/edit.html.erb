@@ -1,2 +1,61 @@
-<h1>Questions#edit</h1>
-<p>Find me in app/views/questions/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <%= form_with model: @question, class:"area" do |form| %>
+
+      <h3>タイトル</h3>
+      <div class="form-group">
+        <%= form.text_field :title, placeholder:"タイトル", size:"100x1" %>
+      </div>
+
+      <h3>やりたい事</h3>
+      <div class="form-group">
+        <%= form.text_area :premise, placeholder:" 前提・実現したいこと", size:"100x1" %>
+      </div>
+
+
+      <a class="btn btn-default" data-toggle="collapse" href="#error">
+        エラー文
+      </a><br><br>
+      <div class="collapse" id="error">
+        <div class="form-group">
+          <%= form.text_area :error, placeholder:"発生している問題・エラーメッセージ", class:"card card-body bg-light p-5", size:"100x5" %>
+        </div>
+      </div>
+
+
+      <a class="btn btn-default" data-toggle="collapse" href="#try">
+        試した事
+      </a><br><br>
+      <div class="collapse" id="try">
+        <div class="form-group">
+          <%= form.text_area :try, placeholder:"試した事", class:"card card-body bg-light p-5", size:"100x5" %>
+        </div>
+      </div>
+
+
+      <a class="btn btn-default" data-toggle="collapse" href="#content">
+        ソースコード
+      </a><br><br>
+      <div class="collapse" id="content">
+        <div class="form-group">
+          <%= form.text_area :content, placeholder:"該当のソースコード", class:"card card-body bg-light p-5", size:"100x5" %>
+        </div>
+      </div>
+
+
+      <a class="btn btn-default" data-toggle="collapse" href="#note">
+        補足
+      </a><br><br>
+      <div class="collapse" id="note">
+        <div class="form-group">
+          <%= form.text_area :note, placeholder:"補足情報（FW/ツールのバージョンなど）", size:"100x1" %>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <%= form.submit "決定" %>
+      </div>
+    <% end %>
+  </div>
+</div>
