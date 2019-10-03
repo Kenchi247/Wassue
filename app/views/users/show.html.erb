@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row top">
+    <div class="col-lg-3 col-lg-offset-1">
+      <%= attachment_image_tag @user, :profile_image, size:"200x200", fallback: "no_image.jpg" %><br>
+      <%= @user.name %><br>
+      <strong>score </strong><%= @user.score %><br><br>
+      <% if @user.score >= 50 %>
+        <%= link_to "問題を作成","#" %>
+      <% else %>
+      <% end %>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="well well-lg">
+      <%= @user.introduction %>
+      </div>
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-10">
+          <%= link_to "編集", edit_user_registration_path(@user.id) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table">
+      </table>
+    </div>
+  </div>
+
+
+
+  <ul class="nav nav-tabs">
+	<li><a href="#sampleContentA" data-toggle="tab">回答</a></li>
+	<li><a href="#sampleContentC" data-toggle="tab">質問</a></li>
+	<li><a href="#sampleContentD" data-toggle="tab">問題</a></li>
+</ul>
+
+<!-- タブ内容 -->
+<div class="tab-content">
+	<div class="tab-pane" id="sampleContentA">
+		<p>タブＡの内容</p>
+	</div>
+	<div class="tab-pane" id="sampleContentC">
+		<p>タブＣの内容</p>
+	</div>
+	<div class="tab-pane" id="sampleContentD">
+		<p>タブＤの内容</p>
+	</div>
+</div>
+</div>

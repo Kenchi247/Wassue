@@ -1,0 +1,37 @@
+<div class="container">
+  <%  @questions.each do |t| %>
+    <div class="row">
+
+      <% answer = Answer.where(id: t.id) %>
+        <div class="col-lg-1">
+          <% if answer.count == 0 %>
+            <h4><span class="label label-warning">未回答</span></h4>
+          <%# <% elsif %> %>
+          <% else %>
+            <h4><span class="label label-default">受付中</span></h4>
+          <% end %>
+          <%= answer.count %>
+        </div>
+
+        <div class="col-lg-6">
+          <%= link_to question_path(t.id) do %>
+            <%= t.title %>
+          <% end %>
+        </div>
+
+
+        <div class="col-lg-3">
+          <% user = User.find(t.user_id) %>
+          <%= attachment_image_tag user, :profile_image, size:"50x50", fallback: "no_image.jpg" %>
+          <%= user.name %>
+        </div>
+
+        <div class="col-lg-2">
+          <time datetime="<%= t.created_at %>">
+            <%= time_ago_in_words(t.created_at) %>
+          </time>
+        </div>
+
+    </div>
+  <% end %>
+</div>
