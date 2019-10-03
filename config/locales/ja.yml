@@ -1,37 +1,37 @@
 ja:
   datetime:
     distance_in_words:
-      half_a_minute: "30s"
+      half_a_minute: "30 s"
       less_than_x_seconds:
         one:   "1s"
-        other: "%{count}s"
+        other: "%{count} s"
       x_seconds:
         one:   "1s"
-        other: "%{count}s ago"
+        other: "%{count} s ago"
       less_than_x_minutes:
         one:   "1m"
-        other: "%{count}m ago"
+        other: "%{count} m ago"
       x_minutes:
         one:   "1 m"
-        other: "%{count}m ago"
+        other: "%{count} m ago"
       about_x_hours:
         one:   "1 h"
-        other: "%{count}h ago"
+        other: "%{count} h ago"
       x_days:
         one:   "1 day"
-        other: "%{count}day ago"
+        other: "%{count} day ago"
       about_x_months:
         one:   "1 month"
-        other: "%{count}month ago"
+        other: "%{count} month ago"
       x_months:
         one:   "1 month"
-        other: "%{count}month ago"
+        other: "%{count} month ago"
       almost_x_years:
         one:   "１years"
-        other: "%{count}years ago"
+        other: "%{count} years ago"
       about_x_years:
         one:   "1 years"
-        other: "%{count}1years ago"
+        other: "%{count} years ago"
       over_x_years:
         one:   "over　1 year ago"
         other: "over %{count} year ago"

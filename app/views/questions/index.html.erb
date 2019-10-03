@@ -1,37 +1,46 @@
 <div class="container">
   <%  @questions.each do |t| %>
-    <div class="row">
+    <div class="questions">
+      <div class="row border-bottom border-info">
 
-      <% answer = Answer.where(id: t.id) %>
-        <div class="col-lg-1">
-          <% if answer.count == 0 %>
-            <h4><span class="label label-warning">未回答</span></h4>
-          <%# <% elsif %> %>
-          <% else %>
-            <h4><span class="label label-default">受付中</span></h4>
-          <% end %>
-          <%= answer.count %>
-        </div>
+        <% answer = Answer.where(id: t.id) %>
+          <div class="col-lg-1">
+            <% if answer.count == 0 %>
+              <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+            <%# <% elsif %> %>
+            <% else %>
+              <h5><span class="badge badge-pill badge-default">受付中</span></h5>
+            <% end %>
+            <%= answer.count %>
+          </div>
 
-        <div class="col-lg-6">
-          <%= link_to question_path(t.id) do %>
-            <%= t.title %>
-          <% end %>
-        </div>
+          <div class="col-lg-6">
+            <%= link_to question_path(t.id), class:"text-secondary" do %>
+              <h3><%= t.title %></h3>
+            <% end %>
+
+            <% question_score = QuestionScore.where(id: t.id) %>
+            <h6>評価 <%= question_score.count %> 件</h6>
+          </div>
 
 
-        <div class="col-lg-3">
-          <% user = User.find(t.user_id) %>
-          <%= attachment_image_tag user, :profile_image, size:"50x50", fallback: "no_image.jpg" %>
-          <%= user.name %>
-        </div>
+          <div class="col-lg-3">
+            <% user = User.find(t.user_id) %>
+            <%= attachment_image_tag user, :profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
+            <%= user.name %>
+          </div>
 
-        <div class="col-lg-2">
-          <time datetime="<%= t.created_at %>">
-            <%= time_ago_in_words(t.created_at) %>
-          </time>
-        </div>
+          <div class="col-lg-2">
+              <%= time_ago_in_words(t.created_at) %>
+          </div>
 
+      </div>
     </div>
   <% end %>
+
+    <div class="row justify-content-center">
+      <%= paginate @questions, class: "paginate", class:"justify-content-center" %>
+    </div>
+    <nav aria-label="ページャー">
+
 </div>

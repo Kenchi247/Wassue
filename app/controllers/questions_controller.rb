@@ -4,11 +4,13 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.page(params[:page]).reverse_order
   end
 
   def show
     @question = Question.find(params[:id])
+    @user = User.find_by(id: @question.user_id)
+    @score = QuestionScore.where(question_id: @question.id)
   end
 
   def create
@@ -24,9 +26,16 @@ class QuestionsController < ApplicationController
 
 
   def update
+      question = Question.find(param[:id])
+      if question.update!(question_params)
+        redirect_to question_path(question.id)
+      else
+        render :edit
+      end
   end
 
   def edit
+    @question = Question.find(params[:id])
   end
 
   private

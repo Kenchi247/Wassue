@@ -1,53 +1,112 @@
 <div class="container">
   <div class="row top">
+
     <div class="col-lg-3 col-lg-offset-1">
-      <%= attachment_image_tag @user, :profile_image, size:"200x200", fallback: "no_image.jpg" %><br>
+      <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %><br>
       <%= @user.name %><br>
-      <strong>score </strong><%= @user.score %><br><br>
-      <% if @user.score >= 50 %>
-        <%= link_to "問題を作成","#" %>
-      <% else %>
-      <% end %>
+      <strong>score </strong><%= @user.score %><br>
+        <%= link_to "問題を作成する","#" %>
     </div>
 
     <div class="col-lg-8">
-      <div class="well well-lg">
+      <div class="card card-body bg-light p-5">
       <%= @user.introduction %>
       </div>
+
       <div class="row">
-        <div class="col-lg-2 col-lg-offset-10">
-          <%= link_to "編集", edit_user_registration_path(@user.id) %>
+        <div class="col-lg-2 offset-lg-10">
+          <%= link_to edit_user_registration_path(@user.id) do %>
+            <button type="button" class="btn btn-primary">
+              編集
+            </button>
+          <% end %>
         </div>
       </div>
     </div>
+
   </div>
 
+      <ul class="nav nav-tabs">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table">
-      </table>
-    </div>
-  </div>
+      	<li class="col-lg-1"><a href="#question" data-toggle="tab">
+          <button type="button" class="btn btn-primary">
+            質問
+          </button></a>
+        </li>
+
+      	<li class="col-lg-1"><a href="#sampleContentC" data-toggle="tab">
+            <button type="button" class="btn btn-primary">
+              回答
+            </button></a>
+        </li>
+
+      	<li class="col-lg-1"><a href="#sampleContentD" data-toggle="tab">
+          <button type="button" class="btn btn-primary">
+            問題
+          </button></a>
+        </li>
+
+      </ul>
 
 
+      <div class="tab-content">
 
-  <ul class="nav nav-tabs">
-	<li><a href="#sampleContentA" data-toggle="tab">回答</a></li>
-	<li><a href="#sampleContentC" data-toggle="tab">質問</a></li>
-	<li><a href="#sampleContentD" data-toggle="tab">問題</a></li>
-</ul>
+      	<div class="tab-pane" id="question">
+      		<% @questions.each do |t| %>
+            <div class="questions">
+              <div class="row border-bottom border-info">
 
-<!-- タブ内容 -->
-<div class="tab-content">
-	<div class="tab-pane" id="sampleContentA">
-		<p>タブＡの内容</p>
-	</div>
-	<div class="tab-pane" id="sampleContentC">
-		<p>タブＣの内容</p>
-	</div>
-	<div class="tab-pane" id="sampleContentD">
-		<p>タブＤの内容</p>
-	</div>
-</div>
+                <% answer = Answer.where(id: t.id) %>
+                  <div class="col-lg-1">
+                    <% if answer.count == 0 %>
+                        <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+                      <%# <% elsif %> %>
+                      <% else %>
+                        <h5><span class="badge badge-pill badge-default">受付中</span></h5>
+                    <% end %>
+
+                    <%= answer.count %>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <%= link_to question_path(t.id), class:"text-secondary" do %>
+                      <h3><%= t.title %></h3>
+                    <% end %>
+
+                    <% question_score = QuestionScore.where(id: t.id) %>
+                    <h6><%= question_score.count %> 評価</h6>
+                  </div>
+
+                  <div class="col-lg-2">
+                    <br>
+                      <%= time_ago_in_words(t.created_at) %>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <% if @user = current_user %>
+                      <%= link_to  edit_question_path(t.id) do %>
+                       <button type="button" class="btn btn-primary">
+                         編集
+                       </button>
+                      <% end %>
+                    <% else %>
+                    <% end %>
+                  </div>
+
+              </div>
+            </div>
+          <% end %>
+      	</div>
+
+
+      	<div class="tab-pane" id="sampleContentC">
+      		<p>タブＣの内容</p>
+      	</div>
+
+
+      	<div class="tab-pane" id="sampleContentD">
+      		<p>タブＤの内容</p>
+      	</div>
+      </div>
+
 </div>

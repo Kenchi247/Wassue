@@ -1,2 +1,91 @@
 <div class="container">
-  <div class="row">
+
+  <div class="head">
+    <div class="row border-bottom">
+      <div class="col-lg-4">
+        <h1><%= @question.title %></h1>
+      </div>
+
+      <div class="col-lg-2">
+        <br>
+        評価 <%= @score.count %> 件
+      </div>
+
+      <div class="col-lg-3 offset-3 text-center">
+        <br>
+        <%= @question.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="col-lg-7 border-bottom" id="premise">
+          <%= @question.premise %>
+      </div>
+
+      <div class="col-lg-3 offset-2 text-center">
+        <%= attachment_image_tag @user, :profile_image, size:"100x100", class:"rounded", fallback: "no_image.jpg" %><br>
+        <%= link_to user_path(@user) do %>
+          <h4><%= @user.name %></h4>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class="row error">
+      <div class="col-lg-7 card card-body bg-light p-5" id="error">
+        <%= @question.error %>
+      </div>
+
+      <div class="col-lg-3 offset-2 text-center">
+        <div id="list-example" class="list-group" style="max-width: 180px;">
+          <a class="list-group-item active list-group-item-action" href="#premise">やりたい事</a>
+          <a class="list-group-item list-group-item-action" href="#error">エラー文</a>
+          <a class="list-group-item list-group-item-action" href="#try"> 試した事</a>
+          <a class="list-group-item list-group-item-action" href="#content"> 該当ソース</a>
+          <a class="list-group-item list-group-item-action" href="#note"> 補足</a>
+          <a class="list-group-item list-group-item-action" href="#anwer"> 回答</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row card card-body bg-light p-5" id="try">
+      <%= @question.try %>
+    </div>
+
+    <div class="row card card-body bg-light p-5" id="content">
+      <%= @question.content %>
+    </div>
+
+    <div class="row border-bottom" id="note">
+      <div class="col-lg-8">
+        <%= @question.note %>
+      </div>
+      <div class="col-lg-2 offset-2">
+        
+      </div>
+    </div>
+
+
+    <div class="row border-bottom" id="answer">
+      <div class="col-lg-3">
+        回答<%= %> 件
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+<style>
+  .head,  .error, #try, #content {
+    margin-bottom: 50px;
+  }
+  #note {
+    margin-bottom: 100px;
+  }
+
+</style>

@@ -1,27 +1,25 @@
 <div class="container">
-  <h1><u>It was isseu</u></h1><br>
-  <%= link_to "質問の仕方について", "#" %>
 
   <div class="row">
     <%= form_with model: @question, class:"area" do |form| %>
 
       <h3>タイトル</h3>
       <div class="form-group">
-        <%= form.text_field :title, placeholder:"タイトル", class:"well", size:"100x1" %>
+        <%= form.text_field :title, placeholder:"タイトル", size:"100x1" %>
       </div>
 
       <h3>やりたい事</h3>
       <div class="form-group">
-        <%= form.text_area :premise, placeholder:" 前提・実現したいこと", class:"well", size:"100x1" %>
+        <%= form.text_area :premise, placeholder:" 前提・実現したいこと", size:"100x1" %>
       </div>
 
 
       <a class="btn btn-default" data-toggle="collapse" href="#error">
-        エラーメッセージ
+        エラー文
       </a><br><br>
       <div class="collapse" id="error">
         <div class="form-group">
-          <%= form.text_area :error, placeholder:"発生している問題・エラーメッセージ", class:"well", size:"100x5" %>
+          <%= form.text_area :error, placeholder:"発生している問題・エラーメッセージ", class:"card card-body bg-light p-5", size:"100x5" %>
         </div>
       </div>
 
@@ -31,7 +29,7 @@
       </a><br><br>
       <div class="collapse" id="try">
         <div class="form-group">
-          <%= form.text_area :try, placeholder:"試した事", class:"well", size:"100x5" %>
+          <%= form.text_area :try, placeholder:"試した事", class:"card card-body bg-light p-5", size:"100x5" %>
         </div>
       </div>
 
@@ -41,7 +39,7 @@
       </a><br><br>
       <div class="collapse" id="content">
         <div class="form-group">
-          <%= form.text_area :content, placeholder:"該当のソースコード", class:"well", size:"100x5" %>
+          <%= form.text_area :content, placeholder:"該当のソースコード", class:"card card-body bg-light p-5", size:"100x5" %>
         </div>
       </div>
 
@@ -51,7 +49,7 @@
       </a><br><br>
       <div class="collapse" id="note">
         <div class="form-group">
-          <%= form.text_area :note, placeholder:"補足情報（FW/ツールのバージョンなど）", class:"well", size:"100x1" %>
+          <%= form.text_area :note, placeholder:"補足情報（FW/ツールのバージョンなど）", size:"100x1" %>
         </div>
       </div>
 
