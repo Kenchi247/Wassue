@@ -61,8 +61,21 @@
       <div class="col-lg-8">
         <%= @question.note %>
       </div>
+
       <div class="col-lg-2 offset-2">
-        
+        <% if @question.favorited_by?(current_user) %>
+          <li>
+            <%= link_to question_question_score_path(@question), method: :delete do %>
+              <%= @question.question_scores.count %> いいね
+            <% end %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to question_question_score_path(@question), method: :post do %>
+              <%= @question.question_scores.count %> いいね
+            <% end %>
+          </li>
+        <% end %>
       </div>
     </div>
 

@@ -5,6 +5,6 @@ class Answer < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   def favorited_by?(user)
-      answer_score.where(user_id: user.id).exists?
+      answer_scores.where(user_id: user.id).exists?
   end
 end
