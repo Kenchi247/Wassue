@@ -14,10 +14,18 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-2 offset-lg-10">
+        <div class="col-lg-2 offset-lg-7">
           <%= link_to edit_user_registration_path(@user.id) do %>
             <button type="button" class="btn btn-primary">
               編集
+            </button>
+          <% end %>
+        </div>
+
+        <div class="col-lg-2">
+          <%= link_to destroy_user_session_path,method: :delete do %>
+            <button type="button" class="btn btn-primary">
+              ログアウト
             </button>
           <% end %>
         </div>
@@ -56,13 +64,13 @@
             <div class="questions">
               <div class="row border-bottom border-info">
 
-                <% answer = Answer.where(id: t.id) %>
-                  <div class="col-lg-1">
+                <% answer = Answer.where(question_id: t.id) %>
+                  <div class="col-lg-1 text-center">
                     <% if answer.count == 0 %>
                         <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
                       <%# <% elsif %> %>
                       <% else %>
-                        <h5><span class="badge badge-pill badge-default">受付中</span></h5>
+                        <h5><span class="badge badge-pill badge-info">受付中</span></h5>
                     <% end %>
 
                     <%= answer.count %>
