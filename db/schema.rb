@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_025410) do
   create_table "answer_scores", force: :cascade do |t|
     t.integer "user_id"
     t.integer "answer_id"
-    t.integer "answer_score"
+    t.integer "answer_score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

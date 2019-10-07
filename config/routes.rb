@@ -7,8 +7,11 @@ Rails.application.routes.draw do
 
   resources :questions do
       resource :question_score, only: [:create, :destroy]
-    resources :answer, only: [:create, :destroy] do
-      resource :answer_scores, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy] do
+        member do
+          post '/up' => 'answer_scores#up'
+          post '/down' => 'answer_scores#down'
+        end
       resource :comments, only: [:create, :destroy]
     end
   end
