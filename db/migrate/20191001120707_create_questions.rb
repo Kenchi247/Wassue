@@ -4,11 +4,7 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.string :title
       t.string :question_status, default: "未回答"
-      t.text :premise
-      t.text :error
-      t.text :try
       t.text :content
-      t.text :note
 
       t.timestamps
     end

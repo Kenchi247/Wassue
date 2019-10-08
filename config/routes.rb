@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resource :question_score, only: [:create, :destroy]
     resources :answers, only: [:create, :destroy, :update] do
         member do
+          patch '/BestAnswer' => 'answers#bestanswer'
           post '/up' => 'answer_scores#up'
           post '/down' => 'answer_scores#down'
         end

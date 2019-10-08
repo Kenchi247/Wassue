@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_061738) do
     t.integer "user_id"
     t.integer "question_id"
     t.text "answer_content"
-    t.boolean "best_answer"
+    t.boolean "best_answer", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,11 +73,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_061738) do
     t.integer "user_id"
     t.string "title"
     t.string "question_status", default: "未回答"
-    t.text "premise"
-    t.text "error"
-    t.text "try"
     t.text "content"
-    t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

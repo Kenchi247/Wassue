@@ -4,11 +4,12 @@
       <div class="row">
         <% answer = Answer.where(question_id: t.id) %>
           <div class="col-lg-1 text-center">
-            <% if answer.count == 0 %>
+            <% if t.question_status == "未回答" %>
               <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
-            <%# <% elsif %> %>
-            <% else %>
+            <% elsif t.question_status == "受付中" %>
               <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+            <% else %>
+              <h5><span class="badge badge-pill badge-danger">解決済</span></h5>
             <% end %>
           </div>
           <div class="col-lg-11">
@@ -20,7 +21,7 @@
 
       <div class="row border-bottom boder-ingo">
           <div class="col-lg-1 text-center">
-            <%= answer.count %>
+            <h4><%= answer.count %></h4>
           </div>
 
           <div class="col-lg-6">
