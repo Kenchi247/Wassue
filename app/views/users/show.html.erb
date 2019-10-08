@@ -23,10 +23,13 @@
         </div>
 
         <div class="col-lg-2">
-          <%= link_to destroy_user_session_path,method: :delete do %>
-            <button type="button" class="btn btn-primary">
-              ログアウト
-            </button>
+          <% if @user.id == current_user.id %>
+            <%= link_to destroy_user_session_path,method: :delete do %>
+              <button type="button" class="btn btn-primary">
+                ログアウト
+              </button>
+            <% end %>
+          <% else %>
           <% end %>
         </div>
       </div>
@@ -42,7 +45,7 @@
           </button></a>
         </li>
 
-      	<li class="col-lg-1"><a href="#sampleContentC" data-toggle="tab">
+      	<li class="col-lg-1"><a href="#answer" data-toggle="tab">
             <button type="button" class="btn btn-primary">
               回答
             </button></a>
@@ -60,55 +63,11 @@
       <div class="tab-content">
 
       	<div class="tab-pane" id="question">
-      		<% @questions.each do |t| %>
-            <div class="questions">
-              <div class="row border-bottom border-info">
-
-                <% answer = Answer.where(question_id: t.id) %>
-                  <div class="col-lg-1 text-center">
-                    <% if answer.count == 0 %>
-                        <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
-                      <%# <% elsif %> %>
-                      <% else %>
-                        <h5><span class="badge badge-pill badge-info">受付中</span></h5>
-                    <% end %>
-
-                    <%= answer.count %>
-                  </div>
-
-                  <div class="col-lg-6">
-                    <%= link_to question_path(t.id), class:"text-secondary" do %>
-                      <h3><%= t.title %></h3>
-                    <% end %>
-
-                    <% question_score = QuestionScore.where(id: t.id) %>
-                    <h6><%= question_score.count %> 評価</h6>
-                  </div>
-
-                  <div class="col-lg-2">
-                    <br>
-                      <%= time_ago_in_words(t.created_at) %>
-                  </div>
-
-                  <div class="col-lg-3">
-                    <% if @user = current_user %>
-                      <%= link_to  edit_question_path(t.id) do %>
-                       <button type="button" class="btn btn-primary">
-                         編集
-                       </button>
-                      <% end %>
-                    <% else %>
-                    <% end %>
-                  </div>
-
-              </div>
-            </div>
-          <% end %>
+          <%= render 'users/question', questions:@questions, user:@user %>
       	</div>
 
-
-      	<div class="tab-pane" id="sampleContentC">
-      		<p>タブＣの内容</p>
+      	<div class="tab-pane" id="answer">
+          <%= render 'users/answer', answers:@answers, user:@user %>
       	</div>
 
 

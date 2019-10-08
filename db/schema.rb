@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_025410) do
+ActiveRecord::Schema.define(version: 2019_10_07_061738) do
 
   create_table "answer_scores", force: :cascade do |t|
     t.integer "user_id"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 2019_10_02_025410) do
     t.text "example_content"
     t.text "example_answer"
     t.boolean "example_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "question_id"
+    t.text "question_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -13,6 +13,8 @@ class QuestionsController < ApplicationController
     @score = QuestionScore.where(question_id: @question.id)
     @answers = Answer.where(question_id: @question.id)
     @answer = Answer.new
+    @comment = Comment.new
+    @question_comment = QuestionComment.new
   end
 
   def create
@@ -28,7 +30,7 @@ class QuestionsController < ApplicationController
 
 
   def update
-      question = Question.find(param[:id])
+      question = Question.find(params[:id])
       if question.update!(question_params)
         redirect_to question_path(question.id)
       else

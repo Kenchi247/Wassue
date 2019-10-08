@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :questions do
+      resource :question_comments, only: [:create, :destroy]
       resource :question_score, only: [:create, :destroy]
-    resources :answers, only: [:create, :destroy] do
+    resources :answers, only: [:create, :destroy, :update] do
         member do
           post '/up' => 'answer_scores#up'
           post '/down' => 'answer_scores#down'
