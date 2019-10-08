@@ -1,0 +1,35 @@
+<% answers.each do |answer| %>
+  <% answer_question = answer.question_id %>
+  <% question =  Question.find_by(id: answer_question) %>
+  <div class="questions">
+    <div class="row border-bottom border-info">
+
+        <div class="col-lg-1 text-center">
+          <% number = Answer.where(question_id: question) %>
+          <% if number.count == 0 %>
+              <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+            <%# <% elsif %> %>
+            <% else %>
+              <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+          <% end %>
+
+          <%= number.count %>
+        </div>
+
+        <div class="col-lg-6">
+          <%= link_to question_path(question.id), class:"text-secondary" do %>
+            <h3><%= question.title %></h3>
+          <% end %>
+
+          <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
+          <h6>回答の評価 <%= answer_scores.pluck(:answer_score).sum %> 件</h6>
+        </div>
+
+        <div class="col-lg-2">
+          <br>
+            <%= time_ago_in_words(question.created_at) %>
+        </div>
+
+    </div>
+  </div>
+<% end %>

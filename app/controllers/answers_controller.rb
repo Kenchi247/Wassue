@@ -9,6 +9,14 @@ class AnswersController < ApplicationController
     redirect_to question_path(question.id)
   end
 
+  def update
+    question = Question.find(params[:question_id])
+    answer = Answer.find(params[:id])
+    answer.update(answer_params)
+    redirect_to question_path(question.id)
+
+  end
+
   private
     def answer_params
       params.require(:answer).permit(:user_id,  :question_id,  :answer_content, :best_answer)
