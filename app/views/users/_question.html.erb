@@ -4,14 +4,15 @@
 
       <% answer = Answer.where(question_id: t.id) %>
         <div class="col-lg-1 text-center">
-          <% if answer.count == 0 %>
-              <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
-            <%# <% elsif %> %>
-            <% else %>
-              <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+          <% if t.question_status == "未回答" %>
+            <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+          <% elsif t.question_status == "受付中" %>
+            <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+          <% else %>
+            <h5><span class="badge badge-pill badge-danger">解決済</span></h5>
           <% end %>
-
-          <%= answer.count %>
+          <h8>回答</h8><br>
+          <h4><%= answer.count %></h4>
         </div>
 
         <div class="col-lg-6">
@@ -20,7 +21,7 @@
           <% end %>
 
           <% question_score = QuestionScore.where(id: t.id) %>
-          <h6><%= question_score.count %> 評価</h6>
+          <h6>評価<%= question_score.count %> 件</h6>
         </div>
 
         <div class="col-lg-2">

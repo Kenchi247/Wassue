@@ -57,7 +57,7 @@
 
             <% else %>
 
-              <div class="col-lg-1 offset-lg-5">
+              <div class="col-lg-1 offset-lg-4">
                 <%= attachment_image_tag current_user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
               </div><br>
 
@@ -73,6 +73,7 @@
                  追記・追記依頼
                 </button>
               </div>
+
               <div class="col-lg-1">
                 <%= link_to  edit_question_path(@question.id) do %>
                  <button type="button" class="btn btn-outline-primary">
@@ -80,6 +81,13 @@
                  </button>
                 <% end %>
               </div>
+
+              <div class="col-lg-1">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#AnswerModalScrollable" style:"margin-bottom:10px;">
+                 回答
+                </button>
+              </div>
+
             <% end %>
 
         <% else %>
@@ -217,7 +225,7 @@
 
 
 
-            <!--             質問の評価          -->
+            <!--             回答の評価          -->
 
               <% if answer.user_id == current_user.id || @question.question_status == "解決済" then %>
                 <br>
@@ -226,7 +234,7 @@
 
               <% elsif answer_score && answer_score.answer_score == 1 then %>
                 <br><br>
-                <%= answer_scores.pluck(:answer_score).sum %><br>
+                <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
                 <%= link_to down_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
                   <%= octicon("chevron-down", :height => 48) %>
                 <% end %>
@@ -235,7 +243,7 @@
                 <%= link_to up_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
                   <%= octicon("chevron-up", :height => 48) %><br>
                 <% end %>
-                  <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
+                  <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
                 <br><br>
 
               <% else %>
@@ -243,7 +251,7 @@
                   <%= octicon("chevron-up", :height => 48, style:"color:blue;") %><br>
                 <% end %>
 
-                <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
+                <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
 
                 <%= link_to down_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
                   <%= octicon("chevron-down", :height => 48) %>

@@ -2,9 +2,12 @@ class AnswerScoresController < ApplicationController
   def up
       question = Question.find(params[:question_id])
       answer = Answer.find(params[:id])
+      user = User.find_by(id:answer.user_id)
       answer_score = AnswerScore.find_by(user_id: current_user.id, answer_id: answer.id)
       if answer_score
          answer_score.delete
+         score = user.score += 2
+         user.update(score: score)
          redirect_to question_path(question.id)
       else
         score = AnswerScore.new(answer_id: answer.id)
@@ -12,6 +15,8 @@ class AnswerScoresController < ApplicationController
         score.answer_id = answer.id
         score.answer_score = 1
         score.save
+        score = user.score += 2
+        user.update(score: score)
         redirect_to question_path(question.id)
       end
   end
@@ -19,9 +24,12 @@ class AnswerScoresController < ApplicationController
   def down
       question = Question.find(params[:question_id])
       answer = Answer.find(params[:id])
+      user = User.find_by(id:answer.user_id)
       answer_score = AnswerScore.find_by(user_id: current_user.id, answer_id: answer.id)
       if answer_score
          answer_score.delete
+         score = user.score -= 2
+        user.update(score: score)
          redirect_to question_path(question.id)
       else
         score = AnswerScore.new(answer_id: answer.id)
@@ -29,6 +37,8 @@ class AnswerScoresController < ApplicationController
         score.answer_id = answer.id
         score.answer_score = -1
         score.save
+        score = user.score -= 2
+        user.update(score: score)
         redirect_to question_path(question.id)
       end
   end
