@@ -5,7 +5,7 @@ class CreateExamples < ActiveRecord::Migration[5.2]
       t.string :example_title
       t.text :example_content
       t.text :example_answer
-      t.boolean :example_status
+      t.boolean :example_status, default: false
 
       t.timestamps
     end

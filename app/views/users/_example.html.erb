@@ -1,0 +1,29 @@
+<% examples.each do |example| %>
+  <% scores = ExampleScore.where(example_id: example.id) %>
+  <div class="examples">
+    <div class="row border-bottom border-info">
+      <div class="col-lg-1 text-center">
+        <% if example.example_status? %>
+          <br>
+        <% else %>
+          <h8><span class="badge badge-danger">認証待ち</span></h8><br>
+        <% end %>
+        <h4><%= scores.count %></h4>
+      </div>
+
+      <div class="col-lg-6">
+        <%= link_to example_path(example.id) do %>
+          <h3><%= example.example_title %></h3>
+        <% end %>
+      </div>
+
+      <div class="col-lg-1 offset-lg-2">
+        <%# <%= example.impressionist_count %> %>
+      </div>
+
+      <div class="col-lg-2">
+        <%= time_ago_in_words(example.created_at) %>
+      </div>
+    </div>
+  </div>
+<% end %>

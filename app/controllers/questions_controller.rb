@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+
+
   def new
     @question = Question.new
   end
@@ -46,4 +48,5 @@ class QuestionsController < ApplicationController
     def question_params
       params.require(:question).permit(:title, :question_status, :content)
     end
+
 end

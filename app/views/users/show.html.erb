@@ -3,39 +3,43 @@
 
     <div class="col-lg-3 col-lg-offset-1">
       <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %><br>
-      <%= @user.name %><br>
-      <strong>score </strong><%= @user.score %><br>
-        <%= link_to "問題を作成する","#" %>
+      <h4><%= @user.name %></h4>
+      <u>score</u> <strong><h4><%= @user.score %></h4></strong><br>
+      <% if @user == current_user %>
+        <%= link_to "問題を作成する",new_example_path %>
+      <% else %>
+      <% end %>
     </div>
 
     <div class="col-lg-8">
-      <div class="card card-body bg-light p-5">
-      <%= @user.introduction %>
+      <div class="card card-body bg-light p-5" style="height:200px;">
+        <%= @user.introduction %>
       </div>
 
+
+      <% if @user.id == current_user.id %>
       <div class="row">
-        <div class="col-lg-2 offset-lg-7">
+        <div class="col-lg-1 offset-lg-9">
           <%= link_to edit_user_registration_path(@user.id) do %>
             <button type="button" class="btn btn-primary">
               編集
             </button>
           <% end %>
         </div>
-
         <div class="col-lg-2">
-          <% if @user.id == current_user.id %>
-            <%= link_to destroy_user_session_path,method: :delete do %>
-              <button type="button" class="btn btn-primary">
-                ログアウト
-              </button>
-            <% end %>
-          <% else %>
+          <%= link_to destroy_user_session_path,method: :delete do %>
+            <button type="button" class="btn btn-primary">
+              ログアウト
+            </button>
           <% end %>
         </div>
       </div>
+      <% else %>
+      <% end %>
     </div>
-
   </div>
+
+
 
       <ul class="nav nav-tabs">
 
@@ -51,7 +55,7 @@
             </button></a>
         </li>
 
-      	<li class="col-lg-1"><a href="#sampleContentD" data-toggle="tab">
+      	<li class="col-lg-1"><a href="#example" data-toggle="tab">
           <button type="button" class="btn btn-primary">
             問題
           </button></a>
@@ -67,12 +71,12 @@
       	</div>
 
       	<div class="tab-pane" id="answer">
-          <%= render 'users/answer', answers:@answers, user:@user %>
+          <%= render 'users/answer', answers:@answers %>
       	</div>
 
 
-      	<div class="tab-pane" id="sampleContentD">
-      		<p>タブＤの内容</p>
+      	<div class="tab-pane" id="example">
+      		<%= render 'users/example', examples:@examples %>
       	</div>
       </div>
 

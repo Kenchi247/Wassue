@@ -79,3 +79,5 @@ gem 'coderay'
 gem 'octicons_helper'
 
 gem 'pry-byebug'
+gem 'twitter'
+gem 'impressionist'
