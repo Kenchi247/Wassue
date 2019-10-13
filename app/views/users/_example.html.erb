@@ -1,29 +1,45 @@
 <% examples.each do |example| %>
   <% scores = ExampleScore.where(example_id: example.id) %>
+  <% user = User.find_by(id:example.user_id) %>
   <div class="examples">
     <div class="row border-bottom border-info">
       <div class="col-lg-1 text-center">
         <% if example.example_status? %>
-          <br>
+        <br>
         <% else %>
           <h8><span class="badge badge-danger">認証待ち</span></h8><br>
         <% end %>
         <h4><%= scores.count %></h4>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <%= link_to example_path(example.id) do %>
-          <h3><%= example.example_title %></h3>
+          <h3><%= example.example_title %></h3><br>
         <% end %>
+
+        <%#  example.impressionist_count %>
       </div>
 
-      <div class="col-lg-1 offset-lg-2">
-        <%# <%= example.impressionist_count %> %>
-      </div>
+      <% if user.id == current_user.id %>
+        <div class="col-lg-1 offset-lg-2 text-right">
+          <%= link_to  edit_example_path(example.id) do %>
+           <button type="button" class="btn btn-primary">
+             編集
+           </button><br>
+          <% end %>
+          <%= time_ago_in_words(example.created_at) %>
+        </div>
 
-      <div class="col-lg-2">
-        <%= time_ago_in_words(example.created_at) %>
-      </div>
-    </div>
+      <% else %>
+        <div class="col-lg-2 offset-lg-1 text-right">
+          <br>
+          <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+          <%= link_to user_path(user.id) do %>
+            <%= user.name %><br>
+          <% end %>
+          <%= time_ago_in_words(example.created_at) %>
+        </div>
+      <% end %>
+
   </div>
 <% end %>

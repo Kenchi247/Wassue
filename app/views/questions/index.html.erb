@@ -1,53 +1,30 @@
-<div class="container">
-  <%  @questions.each do |t| %>
-    <div class="questions">
-      <div class="row">
-        <% answer = Answer.where(question_id: t.id) %>
-          <div class="col-lg-1 text-center">
-            <% if t.question_status == "未回答" %>
-              <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
-            <% elsif t.question_status == "受付中" %>
-              <h5><span class="badge badge-pill badge-info">受付中</span></h5>
-            <% else %>
-              <h5><span class="badge badge-pill badge-danger">解決済</span></h5>
-            <% end %>
-          </div>
-          <div class="col-lg-11">
-            <%= link_to question_path(t.id), class:"text-secondary" do %>
-              <h4><%= t.title %></h4>
-            <% end %>
-          </div>
+  <div class="row">
+    <div class="col-2 offset-1">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-questions-tab" data-toggle="pill" href="#v-pills-questions" role="tab" aria-controls="v-pills-questions" aria-selected="true">質問</a>
+        <a class="nav-link" id="v-pills-noanswer-tab" data-toggle="pill" href="#v-pills-noanswer" role="tab" aria-controls="v-pills-noanswer" aria-selected="false">未回答</a>
+        <a class="nav-link" id="v-pills-unsolved-tab" data-toggle="pill" href="#v-pills-unsolved" role="tab" aria-controls="v-pills-unsolved" aria-selected="false">未解決</a>
+        <a class="nav-link" id="v-pills-bestanswer-tab" data-toggle="pill" href="#v-pills-bestanswer" role="tab" aria-controls="v-pills-bestanswer" aria-selected="false">解決済</a>
+        <a class="nav-link" id="v-pills-example-tab" data-toggle="pill" href="#v-pills-example" role="tab" aria-controls="v-pills-example" aria-selected="false">例題</a>
       </div>
-
-      <div class="row border-bottom boder-ingo">
-          <div class="col-lg-1 text-center">
-            <h8>回答</h8>
-            <h4><%= answer.count %></h4>
-          </div>
-
-          <div class="col-lg-6">
-          <% question_score = QuestionScore.where(id: t.id) %>
-              <h6>評価 <%= question_score.count %> 件</h6>
-            </div>
-
-            <div class="col-lg-3">
-              <% user = User.find(t.user_id) %>
-              <%= attachment_image_tag user, :profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
-              <%= link_to user_path(user.id) do %>
-                <%= user.name %>
-              <% end %>
-            </div>
-
-            <div class="col-lg-2">
-                <%= time_ago_in_words(t.created_at) %>
-            </div>
+    </div>
+    <div class="col-7">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-questions" role="tabpanel" aria-labelledby="v-pills-questions-tab">
+          <%= render 'users/question', questions:@questions%>
+        </div>
+        <div class="tab-pane fade" id="v-pills-noanswer" role="tabpanel" aria-labelledby="v-pills-noanswer-tab">
+          <%= render 'questions/noanswers', noanswers:@noanswers%>
+        </div>
+        <div class="tab-pane fade" id="v-pills-unsolved" role="tabpanel" aria-labelledby="v-pills-unsolved-tab">
+          <%= render 'questions/unsolved', unsolved:@unsolved%>
+        </div>
+        <div class="tab-pane fade" id="v-pills-bestanswer" role="tabpanel" aria-labelledby="v-pills-bestanswer-tab">
+          <%= render 'questions/bestanswer', bestanswers:@bestanswers%>
+        </div>
+        <div class="tab-pane fade" id="v-pills-example" role="tabpanel" aria-labelledby="v-pills-example-tab">
+          <%= render 'users/example', examples:@examples%>
+        </div>
       </div>
-
     </div>
-  <% end %>
-
-    <div class="row justify-content-center">
-      <%= paginate @questions, class: "paginate", class:"justify-content-center" %>
-    </div>
-
-</div>
+  </div>
