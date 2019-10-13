@@ -1,13 +1,21 @@
   <div class="row">
     <div class="col-2 offset-1">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-questions-tab" data-toggle="pill" href="#v-pills-questions" role="tab" aria-controls="v-pills-questions" aria-selected="true">質問</a>
-        <a class="nav-link" id="v-pills-noanswer-tab" data-toggle="pill" href="#v-pills-noanswer" role="tab" aria-controls="v-pills-noanswer" aria-selected="false">未回答</a>
-        <a class="nav-link" id="v-pills-unsolved-tab" data-toggle="pill" href="#v-pills-unsolved" role="tab" aria-controls="v-pills-unsolved" aria-selected="false">未解決</a>
-        <a class="nav-link" id="v-pills-bestanswer-tab" data-toggle="pill" href="#v-pills-bestanswer" role="tab" aria-controls="v-pills-bestanswer" aria-selected="false">解決済</a>
-        <a class="nav-link" id="v-pills-example-tab" data-toggle="pill" href="#v-pills-example" role="tab" aria-controls="v-pills-example" aria-selected="false">例題</a>
+
+        <a class="nav-link active" id="v-pills-questions-tab" data-toggle="pill" href="#v-pills-questions" role="tab" aria-controls="v-pills-questions" aria-selected="true">質問　　　<%= octicon "issue-opened" %></a>
+
+        <a class="nav-link" id="v-pills-noanswer-tab" data-toggle="pill" href="#v-pills-noanswer" role="tab" aria-controls="v-pills-noanswer" aria-selected="false">未回答　　<%= octicon "report" %></a>
+
+        <a class="nav-link" id="v-pills-unsolved-tab" data-toggle="pill" href="#v-pills-unsolved" role="tab" aria-controls="v-pills-unsolved" aria-selected="false">未解決　　<%= octicon "comment-discussion" %></a>
+
+        <a class="nav-link" id="v-pills-bestanswer-tab" data-toggle="pill" href="#v-pills-bestanswer" role="tab" aria-controls="v-pills-bestanswer" aria-selected="false">解決済　　<%= octicon "issue-closed" %></a>
+
+        <a class="nav-link" id="v-pills-example-tab" data-toggle="pill" href="#v-pills-example" role="tab" aria-controls="v-pills-example" aria-selected="false">例題　　　<%= octicon "terminal" %></a>
+
       </div>
     </div>
+
+    
     <div class="col-7">
       <div class="tab-content" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-questions" role="tabpanel" aria-labelledby="v-pills-questions-tab">
