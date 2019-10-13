@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-lg-1">
-    <%= link_to user_path(current_user.id) do %>
+    <%= link_to user_path(user.id) do %>
        <%= user.name %><br>
     <% end %>
     </div>
@@ -48,10 +48,10 @@
 
 
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-2">
       評価　<strong><%= @score.count %></strong>　件
     </div>
-      <% if @example.user_id == current_user.id %>
+      <% if @example.user_id == current_user %>
 
 
       <div class="col-lg-1 offset-lg-6">
@@ -69,7 +69,7 @@
       </div>
 
       <% else %>
-        <% if @example.favorited_by?(current_user) %>
+        <% if ExampleScore.find_by(example_id: @example.id, user_id: current_user) %>
           <div class="col-lg-1">
             <%= link_to example_example_scores_path(@example), method: :delete, remote: true do %>
               取り消す
@@ -77,12 +77,12 @@
           </div>
         <% else %>
           <div class="col-lg-1">
-            <%= link_to example_example_scores_path(@exmpale), method: :post, remote: true do %>
+            <%= link_to example_example_scores_path(@example), method: :post, remote: true do %>
               評価
             <% end %>
           </div>
         <% end %>
-        <div class="col-lg-2 text-right">
+        <div class="col-lg-2 offset-lg-7">
           <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
             回答を表示する
           </button>

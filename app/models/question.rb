@@ -7,7 +7,4 @@ class Question < ApplicationRecord
 
   is_impressionable
 
-  def favorited_by?(user)
-      question_scores.where(user_id: user.id).exists?
-  end
 end

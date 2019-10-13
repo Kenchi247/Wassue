@@ -44,7 +44,7 @@
       </div><br>
 
       <div class="col-lg-1">
-      <%= link_to user_path(current_user.id) do %>
+      <%= link_to user_path(question_user.id) do %>
          <%= question_user.name %><br>
       <% end %>
       </div>
@@ -63,13 +63,13 @@
       </div>
 
 
-        <% if @question.user_id == current_user.id %>
+        <% if @question.user_id == current_user %>
             <% if @question.question_status == "解決済" %>
             <% else %>
 
 
               <div class="col-lg-2 offset-lg-5">
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#QuestionCommentModalScrollable" style:"margin-bottom:10px;">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#QuestionCommentModalScrollable">
                  追記・追記依頼
                 </button>
               </div>
@@ -83,7 +83,7 @@
               </div>
 
               <div class="col-lg-1">
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#AnswerModalScrollable" style:"margin-bottom:10px;">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#AnswerModalScrollable">
                  回答
                 </button>
               </div>
@@ -98,17 +98,13 @@
 
 
 
-              <% if @question.favorited_by?(current_user) %>
+              <% if QuestionScore.find_by(user_id: current_user, question_id: @question.id) %>
                 <div class="col-lg-1">
-                  <%= link_to question_question_score_path(@question), method: :delete, remote: true do %>
-                    取り消す
-                  <% end %>
+                  <%= link_to "取り消す",question_question_score_path(@question), method: :delete, remote: true %>
                 </div>
               <% else %>
                 <div class="col-lg-1">
-                  <%= link_to question_question_score_path(@question), method: :post, remote: true do %>
-                    評価
-                  <% end %>
+                  <%= link_to "評価",question_question_score_path(@question), method: :post, remote: true %>
                 </div>
               <% end %>
 
