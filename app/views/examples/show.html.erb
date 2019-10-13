@@ -1,0 +1,100 @@
+<style>
+  .head, #content{
+    margin-bottom: 50px;
+  }
+
+</style>
+
+
+
+<div class="container">
+
+  <div class="head">
+    <div class="row border-bottom">
+      <div class="col-lg-9">
+        <h3><%= @example.example_title %></h3>
+      </div>
+
+
+      <div class="col-lg-3 text-center">
+        <br>
+         【　<strong><%= @example.impressionist_count %></strong> <small>PV</small>　】
+        <%= @example.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row card card-body bg-light p-5"">
+    <%= markdown(@example.example_content).html_safe %>
+  </div><br>
+
+  <div class="row" id="content">
+    <% user = User.find_by(id: @example.user_id) %>
+    <div class="col-lg-1 offset-lg-9">
+      <%= attachment_image_tag user, :profile_image, size:"50x50", fallback:"no_image.jpg", class:"rounded-circle" %><br>
+    </div>
+
+    <div class="col-lg-1">
+    <%= link_to user_path(current_user.id) do %>
+       <%= user.name %><br>
+    <% end %>
+    </div>
+
+    <div class="col-lg-1">
+      <strong>score </strong><%= user.score %>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-3">
+      評価　<strong><%= @score.count %></strong>　件
+    </div>
+      <% if @example.user_id == current_user.id %>
+
+
+      <div class="col-lg-1 offset-lg-6">
+        <%= link_to   edit_example_path(@example.id) do %>
+         <button type="button" class="btn btn-outline-primary">
+           編集
+         </button>
+        <% end %>
+      </div>
+
+      <div class="col-lg-2">
+        <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
+          回答を表示する
+        </button>
+      </div>
+
+      <% else %>
+        <% if @example.favorited_by?(current_user) %>
+          <div class="col-lg-1">
+            <%= link_to example_example_scores_path(@example), method: :delete, remote: true do %>
+              取り消す
+            <% end %>
+          </div>
+        <% else %>
+          <div class="col-lg-1">
+            <%= link_to example_example_scores_path(@exmpale), method: :post, remote: true do %>
+              評価
+            <% end %>
+          </div>
+        <% end %>
+        <div class="col-lg-2 text-right">
+          <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
+            回答を表示する
+          </button>
+        </div>
+      <% end %>
+  </div><br>
+  <div class="row border-bottom"></div>
+
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1"><br>
+        <div class="collapse" id="collapseAnswer">
+          <div class="card card card-body bg-light p-5">
+            <%= markdown(@example.example_answer).html_safe %>
+          </div>
+        </div>

@@ -11,12 +11,12 @@
 
         <div id='editor'>
           <div class="form-group">
-            <%= form.text_area :example_content,size:"100x20", class: "form-control", id: "example_content", "v-model" => "input", name: "example[example_content]",
-          value:"#### 問題説明\nここに書いてください\n```ruby\nMarkdown記法が使えます\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %><br>
+            <%= form.text_area :example_content,size:"150x20", class: "form-control", id: "example_content", "v-model" => "input", name: "example[example_content]",
+          value:"#### 問題説明\nここに書いてください\n``` ruby\nMarkdown記法が使えます\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %><br>
           </div>
 
             <div class="form-group">
-              <%= form.text_area :example_answer, size:"100x10", placeholder:"回答をここに書いてください\nMarkdown記法が使えます" %>
+              <%= form.text_area :example_answer, size:"140x10", placeholder:"回答をここに書いてください\nMarkdown記法が使えます" %>
             </div>
 
 

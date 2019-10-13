@@ -6,6 +6,8 @@ class ExamplesController < ApplicationController
   def show
     @example = Example.find(params[:id])
     impressionist(@example, nil, unique: [:session_hash])
+    @score = ExampleScore.where(example_id: @example.id)
+    @user = User.find_by(id: @example.user_id)
   end
 
   def create

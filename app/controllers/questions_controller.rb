@@ -18,6 +18,7 @@ class QuestionsController < ApplicationController
     @user = User.find_by(id: @question.user_id)
     @score = QuestionScore.where(question_id: @question.id)
     @answers = Answer.where(question_id: @question.id)
+    impressionist(@question, nil, unique: [:session_hash])
     @answer = Answer.new
     @comment = Comment.new
     @question_comment = QuestionComment.new
