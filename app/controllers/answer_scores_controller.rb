@@ -1,4 +1,5 @@
 class AnswerScoresController < ApplicationController
+  before_action :authenticate_user!
   def up
       question = Question.find(params[:question_id])
       answer = Answer.find(params[:id])

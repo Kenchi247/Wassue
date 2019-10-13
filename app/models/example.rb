@@ -4,7 +4,4 @@ class Example < ApplicationRecord
 
   is_impressionable
 
-  def favorited_by?(user)
-      example_scores.where(user_id: user.id).exists?
-  end
 end

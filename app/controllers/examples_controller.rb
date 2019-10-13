@@ -1,4 +1,5 @@
 class ExamplesController < ApplicationController
+  before_action :authenticate_user!, only: [:update, :edit, :create, :new]
   def new
     @example = Example.new
   end
@@ -31,9 +32,6 @@ class ExamplesController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destory
   end
 
   private
