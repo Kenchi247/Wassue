@@ -14,6 +14,44 @@
 
 @import "bootstrap";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #6c6b6b;
+}
+
+// header
+.header {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+
+}
+
+
+// top page
+.main {
+  width: 100%;
+  height: 1000px;
+  background:image-url("tsuruno28_TP_V.jpg");
+  background-size:cover;
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.main-content {
+  position: absolute;
+  left: 400px;
+  top: 300px;
+  font-family: 'KodomoRounded';
+  src: font-url('KodomoRounded.otf') ;
+}
+
+#v-pills-example-tab {
+  margin-bottom: 100px;
+}
+
 .top {
   margin-top: 50px;
   text-align: center;
@@ -32,4 +70,25 @@
 }
 .btn-primary {
   margin-top: 30px;
+}
+
+
+
+
+//  show page
+
+.head,  .error, #try, #content {
+  margin-bottom: 50px;
+}
+#note {
+  margin-bottom: 100px;
+}
+.top-img {
+  width: 100%;
+  height: 200px;
+  background:image-url("cat126IMGL6353_TP_V.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 100px;
 }
