@@ -1,0 +1,19 @@
+
+
+  <div class="col-lg-3">
+    <p>評価<%= example.example_score.count %></p>
+  </div>
+
+  <% if ExampleScore.find_by(example_id: example.id, user_id: current_user) %>
+    <div class="col-lg-2">
+      <%= link_to example_example_scores_path(example), method: :delete, remote: true do %>
+        取り消す
+      <% end %>
+    </div>
+  <% else %>
+    <div class="col-lg-2">
+      <%= link_to example_example_scores_path(example), method: :post, remote: true do %>
+        評価
+      <% end %>
+    </div>
+  <% end %>
