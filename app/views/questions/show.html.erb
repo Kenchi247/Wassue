@@ -58,17 +58,20 @@
 
 
 <!--            質問の評価           -->
-      <div class="col-lg-2">
-          評価　<strong><%= @score.count %></strong>　件
-      </div>
+
 
       <% if user_signed_in? %>
         <% if @question.user_id == current_user.id %>
             <% if @question.question_status == "解決済" %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
             <% else %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
 
-
-              <div class="col-lg-2 offset-lg-5">
+              <div class="col-lg-2 offset-lg-6">
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#QuestionCommentModalScrollable">
                  追記・追記依頼
                 </button>
@@ -94,22 +97,19 @@
 
 
           <% if @question.question_status == "解決済" %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
           <% else %>
 
 
-
-              <% if QuestionScore.find_by(user_id: current_user, question_id: @question.id) %>
-                <div class="col-lg-1">
-                  <%= link_to "取り消す",question_question_score_path(@question), method: :delete, remote: true %>
+              <div class="col-lg-3">
+                <div class="score-link" id="score-link-<%= @question.id %>">
+                  <%= render 'question_scores/score', question: @question %>
                 </div>
-              <% else %>
-                <div class="col-lg-1">
-                  <%= link_to "評価",question_question_score_path(@question), method: :post, remote: true %>
-                </div>
-              <% end %>
+              </div>
 
-
-              <div class="col-lg-2 offset-lg-5">
+              <div class="col-lg-2 offset-lg-6">
                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#QuestionCommentModalScrollable" style:"margin-bottom:10px;">
                  追記・追記依頼
                 </button>
@@ -124,6 +124,9 @@
           <% end %>
         <% end %>
       <% else %>
+        <div class="col-lg-2">
+            評価　<strong><%= @score.count %></strong>　件
+        </div>
       <% end %>
 
     </div><br>
