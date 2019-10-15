@@ -62,8 +62,8 @@
           評価　<strong><%= @score.count %></strong>　件
       </div>
 
-
-        <% if @question.user_id == current_user %>
+      <% if user_signed_in? %>
+        <% if @question.user_id == current_user.id %>
             <% if @question.question_status == "解決済" %>
             <% else %>
 
@@ -123,6 +123,8 @@
               </div>
           <% end %>
         <% end %>
+      <% else %>
+      <% end %>
 
     </div><br>
 
@@ -192,14 +194,14 @@
             <div class="col-lg-1 text-center">
 
             <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
-            <% answer_score = AnswerScore.find_by(user_id: current_user.id, answer_id: answer.id) %>
+            <% answer_score = AnswerScore.find_by(user_id: answer.user_id, answer_id: answer.id) %>
             <% user = User.find(answer.user_id ) %>
-            <% best_answer = Answer.find_by(question_id: @question.id, best_answer:true) %>
+
 
 
 
             <!--             回答の評価          -->
-
+            <% if user_signed_in? %>
               <% if answer.user_id == current_user.id || @question.question_status == "解決済" then %>
                 <br>
                 <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
@@ -231,6 +233,11 @@
                 <% end %>
 
               <% end %>
+            <% else %>
+                <br>
+                <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
+                <br>
+            <% end %>
 
             </div>
             <div class="col-lg-10 card card-body bg-light">
@@ -247,57 +254,63 @@
         <!--                ベストアンサー                     -->
           <div class="row">
 
-            <% if best_answer %>
+                <% best_answer = Answer.find_by(question_id: @question.id, best_answer:true) %>
+                <% if best_answer %>
 
-                <% if answer.best_answer == true %>
-                  <div class="col-lg-1">
-                    <h4><span class="badge badge-danger">ベストアンサー</span></h4>
-                  </div>
-                  <div class="col-lg-1 offset-lg-7">
+                      <div class="col-lg-1">
+                        <h4><span class="badge badge-danger">ベストアンサー</span></h4>
+                      </div>
+                      <div class="col-lg-1 offset-lg-7">
+
+
                 <% else %>
-                  <div class="col-lg-1 offset-lg-8">
+                  <% if user_signed_in? %>
+                    <% if @question.user_id == current_user.id && answer.user_id != current_user.id %>
+                      <div class="col-lg-1">
+                      <%= link_to BestAnswer_question_answer_path(@question.id, answer.id), method: :patch do %>
+                        <button type="button" class="btn btn-outline-danger">
+                          ベストアンサー
+                        </button>
+                      <% end %>
+                      </div>
+                        <div class="col-lg-1 offset-lg-7">
+
+                    <% else %>
+                      <div class="col-lg-1 offset-lg-8">
+                    <% end %>
+                  <% else %>
+                      <div class="col-lg-1 offset-lg-8">
+                  <% end %>
+
                 <% end %>
 
-            <% else %>
-              <% if @question.user_id == current_user.id && answer.user_id != current_user.id %>
-                <div class="col-lg-1">
-                <%= link_to BestAnswer_question_answer_path(@question.id, answer.id), method: :patch do %>
-                  <button type="button" class="btn btn-outline-danger">
-                    ベストアンサー
-                  </button>
-                <% end %>
-                </div>
-                  <div class="col-lg-1 offset-lg-7">
+                    <%= attachment_image_tag user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
+                  </div><br>
 
-              <% else %>
-                <div class="col-lg-1 offset-lg-8">
-              <% end %>
+                  <div class="col-lg-1">
+                  <%= link_to user_path(user.id) do %>
+                     <%= user.name %><br>
+                  <% end %>
+                      <strong>score </strong><%= user.score %><br>
+                  </div>
 
-            <% end %>
+                  <div class="col-lg-1">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollable<%= answer.id %>" style:"margin-bottom:10px;">
+                     コメント
+                    </button>
+                  </div>
 
-              <%= attachment_image_tag user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
-            </div><br>
+                  <div class="col-lg-1">
+                  <% if user_signed_in? %>
+                    <% if user.id == current_user.id %>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollableEdit<%= answer.id %>">
+                       編集
+                      </button>
+                    <% else %>
+                    <% end %>
+                  <% else %>
+                  <% end %>
 
-            <div class="col-lg-1">
-            <%= link_to user_path(user.id) do %>
-               <%= user.name %><br>
-            <% end %>
-                <strong>score </strong><%= user.score %><br>
-            </div>
-
-            <div class="col-lg-1">
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollable<%= answer.id %>" style:"margin-bottom:10px;">
-               コメント
-              </button>
-            </div>
-
-            <div class="col-lg-1">
-              <% if user.id == current_user.id %>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollableEdit<%= answer.id %>">
-                 編集
-                </button>
-              <% else %>
-              <% end %>
             </div>
           </div><br>
 

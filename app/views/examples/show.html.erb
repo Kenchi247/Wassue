@@ -31,64 +31,64 @@
   <div class="row" id="content">
     <% user = User.find_by(id: @example.user_id) %>
     <div class="col-lg-1 offset-lg-9">
-      <%= attachment_image_tag user, :profile_image, size:"50x50", fallback:"no_image.jpg", class:"rounded-circle" %><br>
+      <%= attachment_image_tag @user, :profile_image, size:"50x50", fallback:"no_image.jpg", class:"rounded-circle" %><br>
     </div>
 
     <div class="col-lg-1">
     <%= link_to user_path(user.id) do %>
-       <%= user.name %><br>
+       <%= @user.name %><br>
     <% end %>
     </div>
 
     <div class="col-lg-1">
-      <strong>score </strong><%= user.score %>
+      <strong>score </strong><%= @user.score %>
     </div>
 
   </div>
 
 
   <div class="row">
-    <div class="col-lg-2">
-      評価　<strong><%= @score.count %></strong>　件
-    </div>
-      <% if @example.user_id == current_user %>
 
+    <% if user_signed_in? %>
+        <% if @user == current_user.id %>
+          <div class="col-lg-2">
+            評価　<strong><%= @score.count %></strong>　件
+          </div>
 
-      <div class="col-lg-1 offset-lg-6">
-        <%= link_to   edit_example_path(@example.id) do %>
-         <button type="button" class="btn btn-outline-primary">
-           編集
-         </button>
-        <% end %>
-      </div>
-
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
-          回答を表示する
-        </button>
-      </div>
-
-      <% else %>
-        <% if ExampleScore.find_by(example_id: @example.id, user_id: current_user) %>
-          <div class="col-lg-1">
-            <%= link_to example_example_scores_path(@example), method: :delete, remote: true do %>
-              取り消す
+          <div class="col-lg-1 offset-lg-6">
+            <%= link_to  edit_example_path(@example.id) do %>
+             <button type="button" class="btn btn-outline-primary">
+               編集
+             </button>
             <% end %>
           </div>
+
+          <div class="col-lg-2">
+            <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
+              回答を表示する
+            </button>
+          </div>
+
         <% else %>
-          <div class="col-lg-1">
-            <%= link_to example_example_scores_path(@example), method: :post, remote: true do %>
-              評価
-            <% end %>
+
+          <div class="score-link" id="score-link-<%= @example.id %>">
+            <%= render 'example_scores/score', example: @example %>
           </div>
+
+            <div class="col-lg-2 offset-lg-7">
+              <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
+                回答を表示する
+              </button>
+            </div>
         <% end %>
-        <div class="col-lg-2 offset-lg-7">
-          <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#collapseAnswer" aria-expanded="false" aria-controls="collapseAnswer">
-            回答を表示する
-          </button>
-        </div>
-      <% end %>
+    <% else %>
+      <div class="col-lg-2">
+        評価　<strong><%= @score.count %></strong>　件
+      </div>
+    <% end %>
+
   </div><br>
+
   <div class="row border-bottom"></div>
 
     <div class="row">
