@@ -18,7 +18,7 @@
               <h4><%= answers.count %></h4>
             </div>
 
-            <div class="col-lg-8">
+            <div class="col-lg-7">
               <%= link_to question_path(t.id), class:"text-secondary" do %>
                 <h3><%= t.title %></h3>
               <% end %>
@@ -26,25 +26,41 @@
               <% question_score = QuestionScore.where(id: t.id) %>
               <h6>評価<%= question_score.count %> 件</h6>
             </div>
+            <% if user_signed_in? %>
+              <% if user.id == current_user.id %>
+                <div class="col-lg-4 text-right">
+                  <%= link_to  edit_question_path(t.id) do %>
+                   <button type="button" class="btn btn-primary">
+                     編集
+                   </button><br>
+                  <% end %>
+                  【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                  【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                  【　<%= time_ago_in_words(t.created_at) %>　】
+                </div>
 
-            <% if user == current_user %>
-              <div class="col-lg-1 offset-lg-2 text-right">
-                <%= link_to  edit_question_path(t.id) do %>
-                 <button type="button" class="btn btn-primary">
-                   編集
-                 </button><br>
-                <% end %>
-                <%= time_ago_in_words(t.created_at) %>
-              </div>
-
+              <% else %>
+                <div class="col-lg-4 text-right">
+                  <br>
+                  <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+                  <%= link_to user_path(user.id) do %>
+                    <%= user.name %><br>
+                  <% end %>
+                  【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                  【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                  【　<%= time_ago_in_words(t.created_at) %>　】
+                </div>
+              <% end %>
             <% else %>
-              <div class="col-lg-2 offset-lg-1 text-right">
+              <div class="col-lg-4 text-right">
                 <br>
                 <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
                 <%= link_to user_path(user.id) do %>
                   <%= user.name %><br>
                 <% end %>
-                <%= time_ago_in_words(t.created_at) %>
+                【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                【　<%= time_ago_in_words(t.created_at) %>　】
               </div>
             <% end %>
 

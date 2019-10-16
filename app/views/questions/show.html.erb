@@ -1,15 +1,10 @@
-<style>
-  .head,  .error, #try, #content {
-    margin-bottom: 50px;
-  }
-  #note {
-    margin-bottom: 100px;
-  }
-
-</style>
 
 
 
+<div class="container-fulid">
+  <div class="row top-img">
+  </div>
+</div>
 
 
 <!--                   質問内容                               -->
@@ -197,7 +192,6 @@
             <div class="col-lg-1 text-center">
 
             <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
-            <% answer_score = AnswerScore.find_by(user_id: answer.user_id, answer_id: answer.id) %>
             <% user = User.find(answer.user_id ) %>
 
 
@@ -205,37 +199,12 @@
 
             <!--             回答の評価          -->
             <% if user_signed_in? %>
-              <% if answer.user_id == current_user.id || @question.question_status == "解決済" then %>
-                <br>
-                <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
-                <br>
 
-              <% elsif answer_score && answer_score.answer_score == 1 then %>
-                <br><br>
-                <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
-                <%= link_to down_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
-                  <%= octicon("chevron-down", :height => 48) %>
-                <% end %>
+                <div class="score-link" id="score-link-<%= answer.id %>">
+                  <%= render 'answer_scores/score', question: @question, answer: answer %>
+                </div>
 
-              <% elsif answer_score && answer_score.answer_score == -1 then %>
-                <%= link_to up_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
-                  <%= octicon("chevron-up", :height => 48) %><br>
-                <% end %>
-                  <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
-                <br><br>
 
-              <% else %>
-                <%= link_to up_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
-                  <%= octicon("chevron-up", :height => 48, style:"color:blue;") %><br>
-                <% end %>
-
-                <h4><%= answer_scores.pluck(:answer_score).sum %></h4>
-
-                <%= link_to down_question_answer_path(@question.id, answer.id),method: :post, remote: true do %>
-                  <%= octicon("chevron-down", :height => 48) %>
-                <% end %>
-
-              <% end %>
             <% else %>
                 <br>
                 <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
@@ -272,7 +241,7 @@
                       <div class="col-lg-1">
                       <%= link_to BestAnswer_question_answer_path(@question.id, answer.id), method: :patch do %>
                         <button type="button" class="btn btn-outline-danger">
-                          ベストアンサー
+                          ベストアンサーにする
                         </button>
                       <% end %>
                       </div>
