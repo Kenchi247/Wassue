@@ -10,7 +10,7 @@
 <!--                   質問内容                               -->
 
 <div class="container">
-
+  <h3 style="color: red;"><%= notice %></h3>
   <div class="head">
     <div class="row border-bottom">
       <div class="col-lg-9">
@@ -185,7 +185,7 @@
         回答<%= @answers.count %> 件
       </div>
     </div><br>
-
+    <% if @answers.exists? %>
     <% @answers.each do |answer| %>
 
           <div class="row">
@@ -381,6 +381,9 @@
           <div class="row border-bottom"></div><br>
           <% end %>
 
+    <% end %>
+    <% else %>
+      <h3 class="text-center">まだ回答がありません</h3>
     <% end %>
 </div>
 

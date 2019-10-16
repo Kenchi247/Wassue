@@ -2,7 +2,7 @@
 
   <div class="row">
     <%= form_with model: @question, local: true, class:"area" do |form| %>
-
+      <%= render 'layouts/error_messages', model: form.object %>
         <div class="form-group">
           <h3>タイトル</h3>
           <%= form.text_field :title, placeholder:"解決したい事を10文字以上で書いてください", size:"100x1" %>

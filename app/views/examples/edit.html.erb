@@ -2,7 +2,7 @@
 
   <div class="row">
     <%= form_with model: @example, local: true, class:"area" do |form| %>
-
+      <%= render 'layouts/error_messages', model: form.object %>
         <div class="form-group">
           <h3>タイトル</h3>
           <%= form.text_field :example_title, placeholder:"タイトル", size:"100x1" %>

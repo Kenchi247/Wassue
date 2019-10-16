@@ -6,16 +6,19 @@ class AnswersController < ApplicationController
     answer.user_id = current_user.id
     user = User.find_by(id: current_user)
     answer.question_id = question.id
-    answer.save
-    AnswerScore.create(user_id:current_user.id, answer_id:answer.id, answer_score: 0)
-    if question.user_id == answer.user_id
-       question.update(question_status: "解決済")
-       redirect_to question_path(question.id)
+    if answer.save
+      AnswerScore.create(user_id:current_user.id, answer_id:answer.id, answer_score: 0)
+      if question.user_id == answer.user_id
+         question.update(question_status: "解決済")
+         redirect_to question_path(question.id)
+      else
+        score = user.score += 2
+        user.update(score: score)
+        question.update(question_status: "受付中")
+        redirect_to question_path(question.id)
+      end
     else
-      score = user.score += 2
-      user.update(score: score)
-      question.update(question_status: "受付中")
-      redirect_to question_path(question.id)
+      redirect_to question_path(question.id), notice:"回答の内容がありません"
     end
   end
 
@@ -42,4 +45,5 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:user_id,  :question_id,  :answer_content, :best_answer, :best_answer)
     end
+
 end

@@ -27,12 +27,12 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.new(question_params)
-    question.user_id = current_user.id
-    if question.save!
+    @question = Question.new(question_params)
+    @question.user_id = current_user.id
+    if @question.save
        redirect_to questions_path
     else
-      render :new
+       render :new
     end
   end
 

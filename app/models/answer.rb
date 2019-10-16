@@ -4,4 +4,6 @@ class Answer < ApplicationRecord
   has_many :answer_scores, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :answer_content,  presence: true
+
 end
