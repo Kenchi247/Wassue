@@ -6,14 +6,13 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.page(params[:page]).reverse_order
+    @questions = Question.page(params[:page]).search(params[:search]).reverse_order
     @noanswers = Question.where(question_status: "未回答").page(params[:page]).reverse_order
     @unsolved = Question.where(question_status: "受付中").page(params[:page]).reverse_order
     @bestanswers = Question.where(question_status: "解決済").page(params[:page]).reverse_order
     @examples = Example.where(example_status: true).page(params[:page]).reverse_order
     rank = User.limit(5).pluck(:score).sort.reverse
     @rank_user = User.where(score:rank)
-
   end
 
   def show

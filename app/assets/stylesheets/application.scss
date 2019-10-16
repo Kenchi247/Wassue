@@ -22,11 +22,22 @@
 }
 
 // header
-.header {
+.container-head {
+  padding-bottom: 50px;
+  text-align: center;
+}
+header {
   background-color: black;
   width: 100%;
   height: 50px;
+  position: fixed;
+  z-index: 1;
+  color: white;
+  padding-top: 10px;
 
+}
+.fa-home, .fa-question-circle, .fa-gem {
+  color: white;
 }
 
 
@@ -49,7 +60,7 @@
 }
 
 #v-pills-example-tab {
-  margin-bottom: 100px;
+  margin-bottom: 200px;
 }
 
 .top {
@@ -72,6 +83,20 @@
   margin-top: 30px;
 }
 
+// ranking
+.fa-crown {
+  height: 1.5em;
+}
+
+#rank1 {
+  color: gold;
+}
+#rank2 {
+  color: silver;
+}
+#rank3 {
+  color: #8C4841;
+}
 
 
 

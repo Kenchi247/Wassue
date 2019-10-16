@@ -7,4 +7,9 @@ class Question < ApplicationRecord
 
   is_impressionable
 
+  def self.search(search)
+     return Question.all unless search
+     Question.where(["title LIKE? OR content LIKE?", "%#{search}%","%#{search}%"])
+  end
+
 end
