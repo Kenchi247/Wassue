@@ -4,6 +4,7 @@ class Example < ApplicationRecord
 
   #validates :example_title, :example_content, :example_answer,  presence: true
 
+
   is_impressionable
 
   def add_error_sample

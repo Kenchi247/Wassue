@@ -17,7 +17,9 @@
         <header>
           <div class="row">
             <div class="col-3 offset-2">
-              <h2 class="page-title"><i class="far fa-gem"></i>Wassue</h2>
+              <%= link_to questions_path do %>
+                <h2 class="page-title"><i class="far fa-gem"></i>Wassue</h2>
+              <% end %>
             </div>
             <div class="col-2">
               <%= form_with url:questions_path, method: :get, local: true do |form| %>
