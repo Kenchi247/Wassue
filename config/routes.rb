@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
+
     resources :examples do
       resource :example_scores, only: [:create, :destroy]
     end

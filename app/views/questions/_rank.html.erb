@@ -12,7 +12,7 @@
       <% rank_user.each do |user| %>
 
       <tr>
-        <th scope="row"><%= n %></th>
+        <th scope="row" class="text-center"><i class="fas fa-crown" id="rank<%= n %>"></i><br><%= n %></th>
         <td>
           <%= attachment_image_tag user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
         </td>
