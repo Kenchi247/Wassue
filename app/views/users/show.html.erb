@@ -10,7 +10,7 @@
           <%= link_to "問題を作成する",new_example_path %>
         <% else %>
         <% end %>
-      </div>
+    </div>
 
       <div class="col-lg-8">
         <div class="card card-body bg-light p-5" style="height:200px;">
@@ -38,6 +38,11 @@
         <% else %>
         <% end %>
       <% else %>
+      </div>
+        <div class="col-lg-8">
+          <div class="card card-body bg-light p-5" style="height:200px;">
+            <%= @user.introduction %>
+          </div>
       <% end %>
     </div>
   </div>

@@ -5,8 +5,11 @@ class QuestionCommentsController < ApplicationController
     comment = QuestionComment.new(question_comment_params)
     comment.user_id = current_user.id
     comment.question_id = question.id
-    comment.save
-    redirect_to question_path(question.id)
+    if comment.save
+       redirect_to question_path(question.id)
+    else
+       redirect_to question_path(question.id), notice:"コメントが内容がありません"
+    end
   end
   private
   def question_comment_params

@@ -4,8 +4,12 @@ class CommentsController < ApplicationController
     answer = Answer.find(params[:answer_id])
     comment = current_user.comments.new(comment_params)
     comment.answer_id = answer.id
-    comment.save
-    redirect_to question_path(answer.question_id)
+    if comment.save
+       redirect_to question_path(answer.question_id)
+    else
+       redirect_to question_path(question.id), notice:"コメントが内容がありません"
+    end
+
   end
   private
   def comment_params
