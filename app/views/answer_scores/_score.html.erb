@@ -2,7 +2,7 @@
 <% answer_score = AnswerScore.find_by(user_id: answer.user_id, answer_id: answer.id) %>
 
 
-<% if answer.user_id == current_user.id || question.question_status == "解決済" %>
+<% if answer.user_id == current_user.id || answer.user_id == question.user_id || question.question_status == "解決済"  %>
   <br>
   <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
   <br>

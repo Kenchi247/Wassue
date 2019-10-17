@@ -29,7 +29,7 @@
             <% if user_signed_in? %>
               <% if user.id == current_user.id %>
                 <div class="col-lg-4 text-right">
-                  <%= link_to  edit_question_path(t.id) do %>
+                  <%= link_to  edit_question_path(t.id), data: {"turbolinks" => false} do %>
                    <button type="button" class="btn btn-primary">
                      編集
                    </button><br>

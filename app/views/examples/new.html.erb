@@ -1,37 +1,50 @@
-<div class="container">
+<style>
+  .p-5{
+    margin-left: 50px;
+    height: 720px;
+    width: 800px;
+    float:right;
+  }
+</style>
+
+<div class="container-fulid">
 
   <div class="row">
-    <%= form_with model: @example, local: true, class:"area" do |form| %>
+    <div class="offset-1">
+    <%= form_with model: @example, local: true  do |form| %>
       <%= render 'layouts/error_messages', model: form.object %>
-        <div class="form-group">
+
           <h3>タイトル</h3>
-          <%= form.text_field :example_title, placeholder:"タイトル", size:"100x1" %>
+        <div class="form-group">
+          <%= form.text_field :example_title, placeholder:"タイトルを入力", size:"60x1" %>
         </div>
 
 
         <div id='editor'>
           <div class="form-group">
-            <%= form.text_area :example_content,size:"150x20", class: "form-control", id: "example_content", "v-model" => "input", name: "example[example_content]",
-          value:"#### 問題説明\nここに書いてください\n``` ruby\nMarkdown記法が使えます\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %><br>
+
+              <%= form.text_area :example_content,size:"90x15", id: "example_content", "v-model" => "input", name: "example[example_content]",
+              value:"```ruby\nソースコード\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %>
+
+
+
+              <div v-html='input | marked' class="card card-body bg-light p-5" ></div>
+
+
           </div>
+        </div>
+          <%= form.text_area :example_answer,size:"90x14", placeholder:"回答を入力してください" %>
 
-            <div class="form-group">
-              <%= form.text_area :example_answer, size:"140x10", placeholder:"回答をここに書いてください\nMarkdown記法が使えます" %>
-            </div>
+    </div>
+  </div>
 
 
-            <div class="collapse" id="preview">
-              <div v-html='input | marked' class="card card-body bg-light p-5"></div>
-            </div>
+      <div class="col-5">
+        <div class="form-group">
+          <%= form.submit "問題を作成する", class: 'btn btn-success float-right'  %>
         </div>
       </div>
 
-      <div class="form-group">
-        <button type="button" class="btn btn-info offset-lg-9" data-toggle="collapse" data-target="#preview" aria-expanded="false" aria-controls="collapse">
-          プレビュー
-        </button>
-        <%= form.submit "問題を作成", class: 'btn btn-success'  %>
-      </div>
     <% end %>
 </div>
 
@@ -39,18 +52,18 @@
 
 
 
+  <script type="text/javascript">
 
+    window.onload = function() {
+      new Vue({
+        el: '#editor',
+          data: {
+            input: '<%==j @example.example_content %>',
+          },
+          filters: {
+            marked: marked,
+          },
+      });
+    };
 
-      <script type="text/javascript">
-        window.onload = function() {
-          new Vue({
-            el: '#editor',
-              data: {
-                input: '<%==  j @example.example_content %>',
-              },
-              filters: {
-                marked: marked,
-              },
-          });
-        };
-      </script>
+  </script>

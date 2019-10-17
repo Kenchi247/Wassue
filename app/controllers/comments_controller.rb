@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     if comment.save
        redirect_to question_path(answer.question_id)
     else
-       redirect_to question_path(question.id), notice:"コメントが内容がありません"
+       redirect_to question_path(answer.question_id), notice:"コメントの内容がありません"
     end
 
   end
