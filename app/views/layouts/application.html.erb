@@ -38,12 +38,12 @@
                     <% end %>
                     </div>
                   <div class="col-1">
-                    <%= link_to new_question_path do %>
+                    <%= link_to new_question_path, data: {"turbolinks" => false} do %>
                       <i class="fas fa-question-circle"></i>　質問する
                     <% end %>
                   </div>
                   <div class="col-2 text-left">
-                    <%= link_to  new_example_path do %>
+                    <%= link_to  new_example_path, data: {"turbolinks" => false} do %>
                       <i class="far fa-gem"></i>　問題を作成する
                     <% end %>
                   </div>

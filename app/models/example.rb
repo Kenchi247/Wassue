@@ -6,6 +6,7 @@ class Example < ApplicationRecord
 
 
   is_impressionable
+  validate :add_error_sample
 
   def add_error_sample
 

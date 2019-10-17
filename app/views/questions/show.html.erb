@@ -295,9 +295,8 @@
                 <div class="modal fade" id="ModalScrollable<%= answer.id %>" tabindex="-1" role="dialog" aria-labelledby="CommentModalScrollableTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-scrollable" role="document">
                     <div class="modal-content">
+                      <%= form_with(model: [@question, answer, @comment], local: true) do |form| %>
                       <div class="modal-body">
-                        コメント
-                        <%= form_with(model: [@question, answer, @comment], local: true) do |form| %>
                         <%= form.text_area :answer_comment, :rows=>20, :class=>"form-control" %>
                       </div>
                       <div class="modal-footer">
@@ -318,9 +317,8 @@
                     <div class="modal fade" id="ModalScrollableEdit<%= answer.id %>" tabindex="-1" role="dialog" aria-labelledby="EditModalScrollableTitle" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-scrollable" role="document">
                         <div class="modal-content">
+                          <%= form_with model:answer, url: question_answer_path(@question.id, answer),local: true do |form| %>
                           <div class="modal-body">
-                            回答を編集する
-                            <%= form_with model:answer, url: question_answer_path(@question.id, answer),local: true do |form| %>
                             <%= form.text_area :answer_content, :rows=>20, :class=>"form-control" %>
                           </div>
                           <div class="modal-footer">
@@ -395,10 +393,9 @@
     <div class="modal fade" id="AnswerModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
+          <%= form_with(model: [@question, @answer], kl_vkbd_parsed: "true") do |form| %>
           <div class="modal-body">
-
-            <%= form_with(model: [@question, @answer], local: true) do |form| %>
-            <textarea name="answer[answer_content]" class="form-control" rows="20" v-model='input' debounce='50' placeholder="Markdown記法が使えます。"></textarea>
+            <textarea name="answer[answer_content]" class="form-control" rows="20" v-model='input' kl_vkbd_parsed="true" debounce='50' placeholder="Markdown記法が使えます。"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -420,9 +417,8 @@
     <div class="modal fade" id="QuestionCommentModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-          <div class="modal-body">
-
             <%= form_with model:@question_comment, url:question_question_comments_path(@question.id), local: true do |form| %>
+          <div class="modal-body">
             <textarea name="question_comment[question_comment]" class="form-control" rows="20" v-model='input' debounce='50'></textarea>
           </div>
           <div class="modal-footer">

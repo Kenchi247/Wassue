@@ -12,9 +12,9 @@ class ExamplesController < ApplicationController
   end
 
   def create
-    example = Example.new(example_params)
-    example.user_id = current_user.id
-    if example.save
+    @example = Example.new(example_params)
+    @example.user_id = current_user.id
+    if @example.save
       redirect_to user_path(current_user.id)
     else
       render :new

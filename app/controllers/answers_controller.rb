@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     answer.question_id = question.id
     if answer.save
       AnswerScore.create(user_id:current_user.id, answer_id:answer.id, answer_score: 0)
-      if question.user_id == answer.user_id
+      if question.user_id == current_user.id
          question.update(question_status: "解決済")
          redirect_to question_path(question.id)
       else
@@ -33,8 +33,8 @@ class AnswersController < ApplicationController
     question = Question.find(params[:question_id])
     answer = Answer.find(params[:id])
     user = User.find_by(id:answer.user_id)
-    answer.update(best_answer: true)
     question.update(question_status: "解決済")
+    answer.update(best_answer: true)
     user = User.find_by(id:answer.user_id)
     score = user.score += 5
     user.update(score: score)
