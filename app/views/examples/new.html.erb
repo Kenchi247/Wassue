@@ -1,0 +1,69 @@
+<style>
+  .p-5{
+    margin-left: 50px;
+    height: 720px;
+    width: 800px;
+    float:right;
+  }
+</style>
+
+<div class="container-fulid">
+
+  <div class="row">
+    <div class="offset-1">
+    <%= form_with model: @example, local: true  do |form| %>
+      <%= render 'layouts/error_messages', model: form.object %>
+
+          <h3>タイトル</h3>
+        <div class="form-group">
+          <%= form.text_field :example_title, placeholder:"タイトルを入力", size:"60x1" %>
+        </div>
+
+
+        <div id='editor'>
+          <div class="form-group">
+
+              <%= form.text_area :example_content,size:"90x15", id: "example_content", "v-model" => "input", name: "example[example_content]",
+              value:"```ruby\nソースコード\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %>
+
+
+
+              <div v-html='input | marked' class="card card-body bg-light p-5" ></div>
+
+
+          </div>
+        </div>
+          <%= form.text_area :example_answer,size:"90x14", placeholder:"回答を入力してください" %>
+
+    </div>
+  </div>
+
+
+      <div class="col-5">
+        <div class="form-group">
+          <%= form.submit "問題を作成する", class: 'btn btn-success float-right'  %>
+        </div>
+      </div>
+
+    <% end %>
+</div>
+
+
+
+
+
+  <script type="text/javascript">
+
+    window.onload = function() {
+      new Vue({
+        el: '#editor',
+          data: {
+            input: '<%==j @example.example_content %>',
+          },
+          filters: {
+            marked: marked,
+          },
+      });
+    };
+
+  </script>

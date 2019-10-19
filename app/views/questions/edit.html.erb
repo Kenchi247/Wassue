@@ -1,0 +1,89 @@
+<style>
+  .p-5{
+    margin-left: 50px;
+    height: 720px;
+    width: 800px;
+    float:right;
+  }
+</style>
+
+<div class="container-fulid">
+
+  <div class="row">
+    <div class="offset-1">
+    <%= form_with model: @question, local: true  do |form| %>
+      <%= render 'layouts/error_messages', model: form.object %>
+
+          <h3>タイトル</h3>
+        <div class="form-group">
+          <%= form.text_field :title, placeholder:"解決したい事を10文字以上で書いてください", size:"60x1" %>
+        </div>
+
+
+        <div id='editor'>
+          <div class="form-group">
+
+              <%= form.text_area :conten,size:"100x30", id: "question_content", "v-model" => "input", name: "question[content]",
+              value:"#### 前提・実装したい事\nここに書いてください\n#### エラーコード\n```  \nここに書いてください\n```\n#### 該当コード\n``` ruby\nソースコード\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %>
+
+
+              <div v-html='input | marked' class="card card-body bg-light p-5" ></div>
+
+          </div>
+        </div>
+
+    </div>
+  </div>
+      <div class="col-lg-5 offset-lg-1">
+        <div class="form-group">
+          <button type="button" class="btn btn-secondary offset-lg-8" data-toggle="modal" data-target="#about">
+           質問の仕方について
+          </button>
+
+          <%= form.submit "質問する", class: 'btn btn-success float-right'  %>
+        </div>
+      </div>
+
+    <% end %>
+</div>
+
+
+
+
+  <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="about">質問の仕方について</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          1.  <br>
+          2.  <br>
+          3.  <br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript">
+
+    window.onload = function() {
+      new Vue({
+        el: '#editor',
+          data: {
+            input: '#{j @question.content}',
+          },
+          filters: {
+            marked: marked,
+          },
+      });
+    };
+  </script>

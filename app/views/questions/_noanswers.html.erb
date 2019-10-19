@@ -1,0 +1,72 @@
+  <% if noanswers.exists? %>
+    <% noanswers.each do |t| %>
+    <% answers = Answer.where(question_id: t.id) %>
+    <% user = User.find_by(id: t.user_id) %>
+      <div class="questions">
+        <div class="row border-bottom border-info">
+
+
+            <div class="col-lg-1 text-center">
+              <% if t.question_status == "未回答" %>
+                <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+              <% elsif t.question_status == "受付中" %>
+                <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+              <% else %>
+                <h5><span class="badge badge-pill badge-danger">解決済</span></h5>
+              <% end %>
+              <h8>回答</h8><br>
+              <h4><%= answers.count %></h4>
+            </div>
+
+            <div class="col-lg-7">
+              <%= link_to question_path(t.id), class:"text-secondary" do %>
+                <h3><%= t.title %></h3>
+              <% end %>
+
+              <% question_score = QuestionScore.where(id: t.id) %>
+              <h6>評価<%= question_score.count %> 件</h6>
+            </div>
+            <% if user_signed_in? %>
+              <% if user.id == current_user.id %>
+                <div class="col-lg-4 text-right">
+                  <%= link_to  edit_question_path(t.id), data: {"turbolinks" => false} do %>
+                   <button type="button" class="btn btn-primary">
+                     編集
+                   </button><br>
+                  <% end %>
+                  【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                  【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                  【　<%= time_ago_in_words(t.created_at) %>　】
+                </div>
+
+              <% else %>
+                <div class="col-lg-4 text-right">
+                  <br>
+                  <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+                  <%= link_to user_path(user.id) do %>
+                    <%= user.name %><br>
+                  <% end %>
+                  【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                  【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                  【　<%= time_ago_in_words(t.created_at) %>　】
+                </div>
+              <% end %>
+            <% else %>
+              <div class="col-lg-4 text-right">
+                <br>
+                <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+                <%= link_to user_path(user.id) do %>
+                  <%= user.name %><br>
+                <% end %>
+                【<small>評価</small>　<strong><%= t.question_scores.count %></strong>　<small>件</small>】
+                【　<strong><%= t.impressionist_count %></strong> <small>PV</small>　】
+                【　<%= time_ago_in_words(t.created_at) %>　】
+              </div>
+            <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <h1>未回答の質問はありません</h1>
+  <% end %>

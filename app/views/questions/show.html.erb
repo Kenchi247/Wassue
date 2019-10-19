@@ -1,0 +1,431 @@
+
+
+
+<div class="container-fulid">
+  <div class="top-img">
+  </div>
+</div>
+
+
+<!--                   質問内容                               -->
+
+<div class="container">
+  <h3 style="color: red;"><%= notice %></h3>
+  <div class="head">
+    <div class="row border-bottom">
+      <div class="col-lg-9">
+        <h3><%= @question.title %></h3>
+      </div>
+
+
+      <div class="col-lg-3 text-center">
+        <br>
+        【　<strong><%= @question.impressionist_count %></strong> <small>PV</small>　】
+        <%= @question.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>
+    </div>
+  </div>
+
+    <div class="row card card-body bg-light p-5">
+      <%= markdown(@question.content).html_safe %>
+    </div><br>
+
+
+
+    <div class="row" id="content">
+      <% question_user = User.find_by(id: @question.user_id) %>
+      <div class="col-lg-1 offset-lg-9">
+        <%= attachment_image_tag question_user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
+      </div><br>
+
+      <div class="col-lg-1">
+      <%= link_to user_path(question_user.id) do %>
+         <%= question_user.name %><br>
+      <% end %>
+      </div>
+      <div class="col-lg-1">
+        <strong>score </strong><%= question_user.score %>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+
+<!--            質問の評価           -->
+
+
+      <% if user_signed_in? %>
+        <% if @question.user_id == current_user.id %>
+            <% if @question.question_status == "解決済" %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
+            <% else %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
+
+              <div class="col-lg-2 offset-lg-6">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#QuestionCommentModalScrollable">
+                 追記・追記依頼
+                </button>
+              </div>
+
+              <div class="col-lg-1">
+                <%= link_to  edit_question_path(@question.id) do %>
+                 <button type="button" class="btn btn-outline-primary">
+                   編集
+                 </button>
+                <% end %>
+              </div>
+
+              <div class="col-lg-1">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#AnswerModalScrollable">
+                 回答
+                </button>
+              </div>
+
+            <% end %>
+
+        <% else %>
+
+
+          <% if @question.question_status == "解決済" %>
+              <div class="col-lg-2">
+                  評価　<strong><%= @score.count %></strong>　件
+              </div>
+          <% else %>
+
+
+              <div class="col-lg-3">
+                <div class="score-link" id="score-link-<%= @question.id %>">
+                  <%= render 'question_scores/score', question: @question %>
+                </div>
+              </div>
+
+              <div class="col-lg-2 offset-lg-6">
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#QuestionCommentModalScrollable" style:"margin-bottom:10px;">
+                 追記・追記依頼
+                </button>
+              </div>
+
+
+              <div class="col-lg-1">
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#AnswerModalScrollable" style:"margin-bottom:10px;">
+                 回答
+                </button>
+              </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="col-lg-2">
+            評価　<strong><%= @score.count %></strong>　件
+        </div>
+      <% end %>
+
+    </div><br>
+
+
+
+
+
+
+
+
+<!--                                   質問のコメント                                   -->
+
+    <% question_comments = QuestionComment.where(question_id: @question.id) %>
+    <% question_comment = QuestionComment.find_by(question_id: @question.id) %>
+      <% if question_comment %>
+        <div class="row">
+          <div class="col-lg-1 offset-lg-6">
+            <%= octicon("chevron-down", :height => 32, :"data-target" =>"#collapseQuestionComment", :"aria-expanded"=>"false", :"aria-controls"=>"collapseQuestionComment", :"data-toggle"=>"collapse" ) %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="collapse" id="collapseQuestionComment">
+              <% question_comments.each do |comment| %>
+              <% comment_user = User.find_by(id: comment.user_id) %>
+              <div class="card card-body">
+
+                <div class="row">
+                  <div class="col-lg-2 text-center">
+                    <%= attachment_image_tag comment_user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %><br>
+                    <%= comment_user.name %>
+                  </div>
+                  <div class="col-lg-8">
+                    <%= comment.question_comment %>
+                  </div>
+                </div>
+
+              </div><br>
+              <% end %>
+            </div>
+          </div>
+        </div><br>
+      <% else %>
+      <% end %>
+
+    <div class="row border-bottom" id="note"></div>
+
+
+
+
+
+
+
+
+<!--                      回答一覧                                   -->
+
+
+    <div class="row border-bottom">
+      <div class="col-lg-3">
+        回答<%= @answers.count %> 件
+      </div>
+    </div><br>
+    <% if @answers.exists? %>
+    <% @answers.each do |answer| %>
+
+          <div class="row">
+            <div class="col-lg-1 text-center">
+
+            <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
+            <% user = User.find(answer.user_id ) %>
+
+
+
+
+            <!--             回答の評価          -->
+            <% if user_signed_in? %>
+
+                <div class="score-link" id="score-link-<%= answer.id %>">
+                  <%= render 'answer_scores/score', question: @question, answer: answer %>
+                </div>
+
+
+            <% else %>
+                <br>
+                <h4><%= answer_scores.pluck(:answer_score).sum %></h4><br>
+                <br>
+            <% end %>
+
+            </div>
+            <div class="col-lg-10 card card-body bg-light">
+              <%= markdown(answer.answer_content).html_safe %>
+            </div>
+          </div><br>
+
+
+
+
+
+
+
+        <!--                ベストアンサー                     -->
+          <div class="row">
+
+                <% best_answer = Answer.find_by(question_id: @question.id, best_answer:true) %>
+                <% if best_answer %>
+
+                      <div class="col-lg-1">
+                        <h4><span class="badge badge-danger">ベストアンサー</span></h4>
+                      </div>
+                      <div class="col-lg-1 offset-lg-7">
+
+
+                <% else %>
+                  <% if user_signed_in? %>
+                    <% if @question.user_id == current_user.id && answer.user_id != current_user.id %>
+                      <div class="col-lg-1">
+                      <%= link_to BestAnswer_question_answer_path(@question.id, answer.id), method: :patch do %>
+                        <button type="button" class="btn btn-outline-danger">
+                          ベストアンサーにする
+                        </button>
+                      <% end %>
+                      </div>
+                        <div class="col-lg-1 offset-lg-7">
+
+                    <% else %>
+                      <div class="col-lg-1 offset-lg-8">
+                    <% end %>
+                  <% else %>
+                      <div class="col-lg-1 offset-lg-8">
+                  <% end %>
+
+                <% end %>
+
+                    <%= attachment_image_tag user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %>
+                  </div><br>
+
+                  <div class="col-lg-1">
+                  <%= link_to user_path(user.id) do %>
+                     <%= user.name %><br>
+                  <% end %>
+                      <strong>score </strong><%= user.score %><br>
+                  </div>
+
+                  <div class="col-lg-1">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollable<%= answer.id %>" style:"margin-bottom:10px;">
+                     コメント
+                    </button>
+                  </div>
+
+                  <div class="col-lg-1">
+                  <% if user_signed_in? %>
+                    <% if user.id == current_user.id %>
+                      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalScrollableEdit<%= answer.id %>">
+                       編集
+                      </button>
+                    <% else %>
+                    <% end %>
+                  <% else %>
+                  <% end %>
+
+            </div>
+          </div><br>
+
+
+
+
+
+
+            <!--           コメントフォーム           -->
+                <div class="modal fade" id="ModalScrollable<%= answer.id %>" tabindex="-1" role="dialog" aria-labelledby="CommentModalScrollableTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                      <%= form_with(model: [@question, answer, @comment], local: true) do |form| %>
+                      <div class="modal-body">
+                        <%= form.text_area :answer_comment, :rows=>20, :class=>"form-control" %>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        <button type="submit" class="btn btn-success" name="commit" kl_vkbd_parsed="true">コメント</button>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+                <!--         編集フォーム        -->
+                    <div class="modal fade" id="ModalScrollableEdit<%= answer.id %>" tabindex="-1" role="dialog" aria-labelledby="EditModalScrollableTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                          <%= form_with model:answer, url: question_answer_path(@question.id, answer),local: true do |form| %>
+                          <div class="modal-body">
+                            <%= form.text_area :answer_content, :rows=>20, :class=>"form-control" %>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                            <button type="submit" class="btn btn-success" name="commit" kl_vkbd_parsed="true">編集</button>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+          <% answer_comments = Comment.where(answer_id: answer.id) %>
+          <% answer_comment = Comment.find_by(answer_id: answer.id) %>
+
+
+
+
+
+
+    <!--                回答のコメント                        -->
+          <% if answer_comment %>
+
+              <div class="row">
+                <div class="col-lg-1 offset-lg-6">
+                  <svg height="32" class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="32" aria-hidden="true" data-target="#collapseAnswerComment<%= answer.id %>"  arit-expanded="false" aria-controls="collapseAnswerComment" data-toggle="collapse">
+                    <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"></path>
+                  </svg>
+                </div><br>
+              </div>
+
+                <div class="row border-bottom">
+                  <div class="col-lg-8 offset-lg-2">
+
+                    <div class="collapse" id="collapseAnswerComment<%= answer.id %>">
+                      <% answer_comments.each do |comment| %>
+                      <% comment_user = User.find_by(id:comment.user_id) %>
+                      <div class="card card-body">
+                        <div class="row">
+                          <div class="col-lg-2 text-center">
+                            <%= attachment_image_tag comment_user,:profile_image, size:"50x50", fallback: "no_image.jpg", class:"rounded-circle" %><br>
+                            <%= comment_user.name %>
+                          </div>
+
+                          <div class="col-lg-8">
+                            <%= comment.answer_comment %>
+                          </div>
+                        </div>
+                      </div><br>
+                      <% end %>
+                    </div>
+
+                  </div><br>
+                </div><br>
+
+          <% else %>
+          <div class="row border-bottom"></div><br>
+          <% end %>
+
+    <% end %>
+    <% else %>
+      <h3 class="text-center">まだ回答がありません</h3>
+    <% end %>
+</div>
+
+
+
+
+
+    <!-- 回答フォーム -->
+    <div class="modal fade" id="AnswerModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <%= form_with(model: [@question, @answer], kl_vkbd_parsed: "true") do |form| %>
+          <div class="modal-body">
+            <textarea name="answer[answer_content]" class="form-control" rows="20" v-model='input' kl_vkbd_parsed="true" debounce='50' placeholder="Markdown記法が使えます。"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            <button type="submit" class="btn btn-success" name="commit" kl_vkbd_parsed="true">回答</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- 追記・追記 -->
+    <div class="modal fade" id="QuestionCommentModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <%= form_with model:@question_comment, url:question_question_comments_path(@question.id), local: true do |form| %>
+          <div class="modal-body">
+            <textarea name="question_comment[question_comment]" class="form-control" rows="20" v-model='input' debounce='50'></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            <button type="submit" class="btn btn-success" name="commit" kl_vkbd_parsed="true">追記・追記依頼</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>

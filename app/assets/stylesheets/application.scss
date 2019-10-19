@@ -1,0 +1,121 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import "bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #6c6b6b;
+}
+
+// header
+.container-head {
+  padding-bottom: 50px;
+  text-align: center;
+}
+header {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  z-index: 1;
+  color: white;
+  padding-top: 10px;
+
+}
+.fa-home, .fa-question-circle, .fa-gem, .page-title, .fa-sign-in-alt, .fa-user-plus {
+  color: white;
+}
+
+
+// top page
+.main {
+  width: 100%;
+  height: 1000px;
+  background:image-url("tsuruno28_TP_V.jpg");
+  background-size:cover;
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.main-content {
+  position: absolute;
+  left: 400px;
+  top: 300px;
+  font-family: 'KodomoRounded';
+  src: font-url('KodomoRounded.otf') ;
+}
+
+#v-pills-example-tab {
+  margin-bottom: 200px;
+}
+
+.top {
+  margin-top: 50px;
+  text-align: center;
+}
+.well-lg {
+  margin-top: 5px;
+  height:200px;
+}
+
+.questions, .answers, .examples {
+  margin-top: 50px;
+}
+
+.justify-content-center {
+  margin-top: 30px;
+}
+.btn-primary {
+  margin-top: 30px;
+}
+
+// ranking
+.fa-crown {
+  height: 1.5em;
+}
+
+#rank1 {
+  color: gold;
+}
+#rank2 {
+  color: silver;
+}
+#rank3 {
+  color: #8C4841;
+}
+
+#rank4, #rank5 {
+  color: white;
+}
+
+//  show page
+
+.head,  .error, #try, #content {
+  margin-bottom: 50px;
+}
+#note {
+  margin-bottom: 100px;
+}
+.top-img {
+  width: 100%;
+  height: 200px;
+  background:image-url("cat126IMGL6353_TP_V.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin-bottom: 100px;
+}
