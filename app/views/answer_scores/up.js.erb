@@ -1,0 +1,1 @@
+$("#score-link-<%= @answer.id %>").html('<%= escape_javascript(render("answer_scores/score", question: @question, answer: @answer)) %>');

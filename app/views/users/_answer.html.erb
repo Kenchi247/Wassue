@@ -1,0 +1,51 @@
+<% answers.each do |answer| %>
+  <% answer_question = answer.question_id %>
+  <% question =  Question.find_by(id: answer_question) %>
+  <% user = User.find_by(id: question.user_id) %>
+  <div class="answers">
+    <div class="row">
+      <% if answer.best_answer %>
+        <h4><span class="badge badge-danger">ベストアンサー</span></h4>
+      <% else %>
+      <% end %>
+    </div>
+    <div class="row border-bottom border-info">
+
+        <div class="col-lg-1 text-center">
+          <% number = Answer.where(question_id: question) %>
+          <% if question.question_status == "未回答" %>
+            <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
+          <% elsif question.question_status == "受付中" %>
+            <h5><span class="badge badge-pill badge-info">受付中</span></h5>
+          <% else %>
+            <h5><span class="badge badge-pill badge-danger">解決済</span></h5>
+          <% end %>
+          <h8>回答</h8>
+          <h4><%= number.count %></h4>
+
+        </div>
+
+        <div class="col-lg-6">
+          <%= link_to question_path(question.id), class:"text-secondary" do %>
+            <h3><%= question.title %></h3>
+          <% end %>
+
+          <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
+          <h6>回答の評価 <%= answer_scores.pluck(:answer_score).sum %> </h6>
+        </div>
+
+        <div class="col-lg-2">
+          <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+          <%= link_to user_path(user.id) do %>
+            <%= user.name %>
+          <% end %>
+        </div>
+
+        <div class="col-lg-2 offset-lg-1">
+          <br>
+            <%= time_ago_in_words(question.created_at) %>
+        </div>
+
+    </div>
+  </div>
+<% end %>

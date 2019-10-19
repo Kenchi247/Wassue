@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row top">
+
+    <div class="col-lg-3 col-lg-offset-1">
+      <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %><br>
+      <h4><%= @user.name %></h4>
+      <u>score</u> <strong><h4><%= @user.score %></h4></strong><br>
+      <% if user_signed_in? %>
+        <% if @user == current_user.id %>
+          <%= link_to "問題を作成する",new_example_path %>
+        <% else %>
+        <% end %>
+    </div>
+
+      <div class="col-lg-8">
+        <div class="card card-body bg-light p-5" style="height:200px;">
+          <%= @user.introduction %>
+        </div>
+
+
+        <% if @user.id == current_user.id %>
+        <div class="row">
+          <div class="col-lg-1 offset-lg-9">
+            <%= link_to edit_user_registration_path(@user.id) do %>
+              <button type="button" class="btn btn-primary">
+                編集
+              </button>
+            <% end %>
+          </div>
+          <div class="col-lg-2">
+            <%= link_to destroy_user_session_path,method: :delete do %>
+              <button type="button" class="btn btn-primary">
+                ログアウト
+              </button>
+            <% end %>
+          </div>
+        </div>
+        <% else %>
+        <% end %>
+      <% else %>
+      </div>
+        <div class="col-lg-8">
+          <div class="card card-body bg-light p-5" style="height:200px;">
+            <%= @user.introduction %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+
+
+      <ul class="nav nav-tabs">
+
+      	<li class="col-lg-1"><a href="#question" data-toggle="tab">
+          <button type="button" class="btn btn-primary">
+            質問
+          </button></a>
+        </li>
+
+      	<li class="col-lg-1"><a href="#answer" data-toggle="tab">
+            <button type="button" class="btn btn-primary">
+              回答
+            </button></a>
+        </li>
+
+      	<li class="col-lg-1"><a href="#example" data-toggle="tab">
+          <button type="button" class="btn btn-primary">
+            問題
+          </button></a>
+        </li>
+
+      </ul>
+
+
+      <div class="tab-content">
+
+      	<div class="tab-pane" id="question">
+          <%= render 'users/question', questions:@questions, user:@user %>
+      	</div>
+
+      	<div class="tab-pane" id="answer">
+          <%= render 'users/answer', answers:@answers %>
+      	</div>
+
+
+      	<div class="tab-pane" id="example">
+      		<%= render 'users/example', examples:@examples %>
+      	</div>
+      </div>
+
+</div>

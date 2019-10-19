@@ -57,13 +57,18 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
+    autoprefixer-rails (9.6.1.1)
+      execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap (4.1.3)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
+    buftok (0.2.0)
     builder (3.2.3)
     byebug (11.0.1)
     cancancan (2.3.0)
@@ -77,9 +82,7 @@ GEM
       xpath (~> 3.2)
     childprocess (2.0.0)
       rake (< 13.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -97,6 +100,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    equalizer (0.0.11)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.11.1)
@@ -105,12 +109,20 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
+    http (3.3.0)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.0)
+      http_parser.rb (~> 0.6.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http-form_data (2.1.1)
+    http_parser.rb (0.6.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    io-like (0.3.0)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -143,6 +155,8 @@ GEM
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.9.2)
     mime-types (3.3)
       mime-types-data (~> 3.2015)
@@ -153,14 +167,28 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.12.2)
     msgpack (1.3.1)
+    multipart-post (2.1.1)
     mustermann (1.0.3)
     mysql2 (0.5.2)
+    naught (1.1.0)
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.2)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
+    octicons (9.1.1)
+      nokogiri (>= 1.6.3.1)
+    octicons_helper (9.1.1)
+      octicons (= 9.1.1)
+      rails
     orm_adapter (0.5.0)
+    popper_js (1.14.5)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.7.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
     public_suffix (4.0.1)
     puma (3.12.1)
     rack (2.0.7)
@@ -211,6 +239,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redcarpet (2.3.0)
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
@@ -248,6 +277,7 @@ GEM
     selenium-webdriver (3.142.5)
       childprocess (>= 0.5, < 3.0)
       rubyzip (>= 1.2.2)
+    simple_oauth (0.3.1)
     sinatra (2.0.7)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -272,6 +302,17 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
+    twitter (6.2.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.11)
+      http (~> 3.0)
+      http-form_data (~> 2.0)
+      http_parser.rb (~> 0.6.0)
+      memoizable (~> 0.4.0)
+      multipart-post (~> 2.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.3.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.2.0)
@@ -286,6 +327,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webdrivers (4.1.3)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -297,20 +342,26 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  bootstrap (~> 4.1.1)
   byebug
   cancancan
   capybara (>= 2.15)
-  chromedriver-helper
+  coderay
   coffee-rails (~> 4.2)
   devise
+  impressionist
   jbuilder (~> 2.5)
   json
-  kaminari (~> 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mysql2
+  jquery-rails
+  kaminari (~> 1.1.1)
+  octicons_helper
+  pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.3)
   rails_admin (~> 2.0)
+  redcarpet (~> 2.3.0)
   refile!
   refile-mini_magick
   sass-rails (~> 5.0)
@@ -319,9 +370,11 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   turbolinks (~> 5)
+  twitter
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webdrivers
 
 RUBY VERSION
    ruby 2.5.5p157
