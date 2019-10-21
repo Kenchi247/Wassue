@@ -26,9 +26,9 @@ class ExamplesController < ApplicationController
   end
 
   def update
-    example = Example.find(params[:id])
-    if example.update(example_params)
-      redirect_to example_path(example.id)
+    @example = Example.find(params[:id])
+    if @example.update(example_params)
+      redirect_to example_path(@example.id)
     else
       render :edit
     end

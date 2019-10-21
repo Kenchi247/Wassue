@@ -140,9 +140,10 @@
       <% if question_comment %>
         <div class="row">
           <div class="col-lg-1 offset-lg-6">
-            <%= octicon("chevron-down", :height => 32, :"data-target" =>"#collapseQuestionComment", :"aria-expanded"=>"false", :"aria-controls"=>"collapseQuestionComment", :"data-toggle"=>"collapse" ) %>
+            <%= octicon("triangle-down", :height => 32, :"data-target" =>"#collapseQuestionComment", :"aria-expanded"=>"false", :"aria-controls"=>"collapseQuestionComment", :"data-toggle"=>"collapse" ) %>
           </div>
         </div>
+
         <div class="row">
           <div class="col-lg-8 offset-lg-2">
             <div class="collapse" id="collapseQuestionComment">
@@ -228,11 +229,14 @@
 
                 <% best_answer = Answer.find_by(question_id: @question.id, best_answer:true) %>
                 <% if best_answer %>
-
+                  <% if answer.best_answer == true %>
                       <div class="col-lg-1">
                         <h4><span class="badge badge-danger">ベストアンサー</span></h4>
                       </div>
                       <div class="col-lg-1 offset-lg-7">
+                  <% else %>
+                    <div class="col-lg-1 offset-lg-8">
+                  <% end %>
 
 
                 <% else %>
@@ -345,8 +349,10 @@
 
               <div class="row">
                 <div class="col-lg-1 offset-lg-6">
-                  <svg height="32" class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="32" aria-hidden="true" data-target="#collapseAnswerComment<%= answer.id %>"  arit-expanded="false" aria-controls="collapseAnswerComment" data-toggle="collapse">
-                    <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"></path>
+
+                  <svg width="32" height="32" class="octicon octicon-triangle-down" aria-hidden="true" data-target="#collapseAnswerComment<%= answer.id %>"  arit-expanded="false" aria-controls="collapseAnswerComment" data-toggle="collapse" viewBox="0 0 12 16" version="1.1" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M0 5l6 6 6-6H0z">
+                    </path>
                   </svg>
                 </div><br>
               </div>
