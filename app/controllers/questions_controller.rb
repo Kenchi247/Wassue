@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     @unsolved = Question.where(question_status: "受付中").page(params[:page]).reverse_order
     @bestanswers = Question.where(question_status: "解決済").page(params[:page]).reverse_order
     @examples = Example.where(example_status: true).page(params[:page]).reverse_order
-    rank = User.limit(5).pluck(:score).sort.reverse
+    rank = User.where(admin: false).limit(5).pluck(:score).sort.reverse
     @rank_user = User.where(score:rank)
   end
 

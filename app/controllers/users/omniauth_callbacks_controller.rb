@@ -3,6 +3,10 @@ class Users::OmniauthCallbacksController < ApplicationController
     callback_from :twitter
   end
 
+  def github
+    callback_from :github
+  end
+
   private
 
   def callback_from(provider)
