@@ -86,4 +86,8 @@ gem 'octicons_helper'
 gem 'pry-byebug'
 gem 'twitter'
 gem 'impressionist'
+gem 'dotenv-rails'
+gem 'omniauth-twitter'
+gem 'omniauth'
+gem 'omniauth-github'
 
