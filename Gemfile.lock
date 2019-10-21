@@ -384,11 +384,11 @@ DEPENDENCIES
   dotenv-rails
   impressionist
   jbuilder (~> 2.5)
+  jquery-rails
   json
+  kaminari (~> 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mysql2
-  jquery-rails
-  kaminari (~> 1.1.1)
   octicons_helper
   omniauth
   omniauth-github
