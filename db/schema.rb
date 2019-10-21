@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_10_083254) do
+ActiveRecord::Schema.define(version: 2019_10_21_055547) do
 
   create_table "answer_scores", force: :cascade do |t|
     t.integer "user_id"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 2019_10_10_083254) do
     t.boolean "push_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

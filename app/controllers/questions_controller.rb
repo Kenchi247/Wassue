@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:update, :edit, :create, :new]
-
+  before_action :set_twitter_client, only: [:create]
   def new
     @question = Question.new
   end
@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     @unsolved = Question.where(question_status: "受付中").page(params[:page]).reverse_order
     @bestanswers = Question.where(question_status: "解決済").page(params[:page]).reverse_order
     @examples = Example.where(example_status: true).page(params[:page]).reverse_order
-    rank = User.limit(5).pluck(:score).sort.reverse
+    rank = User.where(admin: false).limit(5).pluck(:score).sort.reverse
     @rank_user = User.where(score:rank)
   end
 
@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user_id = current_user.id
     if @question.save
+       @twitter.update("question.title")
        redirect_to questions_path
     else
        render :new
@@ -54,6 +55,15 @@ class QuestionsController < ApplicationController
   private
     def question_params
       params.require(:question).permit(:title, :question_status, :content )
+    end
+
+    def set_twitter_client
+      @twitter = Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_API']
+        config.consumer_secret     = ENV['TWITTER_API_SECRET']
+        config.access_token        = ENV['TWITTER_KEY']
+        config.access_token_secret = ENV['TWITTER_SECRET']
+      end
     end
 
 end
