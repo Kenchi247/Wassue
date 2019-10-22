@@ -85,3 +85,7 @@ gem 'dotenv-rails'
 gem 'omniauth-twitter'
 gem 'omniauth'
 gem 'omniauth-github'
+
+group :production do
+  gem 'mysql2'
+end
