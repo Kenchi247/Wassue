@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/unf_ext-0.0.7.6/ext/unf_ext
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-1p3kuff.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-xmz93g.rb extconf.rb
 checking for -lstdc++... yes
 creating Makefile
 
@@ -20,4 +20,4 @@ linking shared-object unf_ext.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/unf_ext-0.0.7.6/ext/unf_ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20191019-14952-fz5q78
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20191023-10257-1bszw95

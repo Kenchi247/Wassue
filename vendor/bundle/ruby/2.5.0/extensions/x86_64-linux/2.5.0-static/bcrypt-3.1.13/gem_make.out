@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bcrypt-3.1.13/ext/mri
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-ln1jsk.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-hboqv2.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bcrypt-3.1.13/ext/mri
@@ -16,4 +16,4 @@ linking shared-object bcrypt_ext.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bcrypt-3.1.13/ext/mri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20191019-14952-1bzqui5
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20191023-10257-1tqpape

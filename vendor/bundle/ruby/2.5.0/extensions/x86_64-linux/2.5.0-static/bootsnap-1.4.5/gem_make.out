@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-14acuaj.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-8aak0y.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
@@ -35,4 +35,4 @@ linking shared-object bootsnap/bootsnap.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/bootsnap-1.4.5/ext/bootsnap
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20191019-14952-2gdtul/bootsnap
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20191023-10257-y8iqs8/bootsnap

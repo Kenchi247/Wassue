@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/nio4r-2.5.2/ext/nio4r
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-1s2yptk.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-1xg1m46.rb extconf.rb
 checking for unistd.h... yes
 checking for linux/aio_abi.h... yes
 checking for sys/select.h... yes
@@ -340,4 +340,4 @@ linking shared-object nio4r_ext.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/nio4r-2.5.2/ext/nio4r
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20191019-14952-wubn76
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20191023-10257-1uwmpc1

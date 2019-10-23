@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/mysql2-0.5.2/ext/mysql2
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-9dg37u.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-8hng4k.rb extconf.rb
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
 checking for rb_wait_for_single_fd()... yes
@@ -38,4 +38,4 @@ linking shared-object mysql2/mysql2.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/mysql2-0.5.2/ext/mysql2
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 mysql2.so ./.gem.20191019-14952-1hh3lbc/mysql2
+/usr/bin/install -c -m 0755 mysql2.so ./.gem.20191023-10257-1e6ern8/mysql2

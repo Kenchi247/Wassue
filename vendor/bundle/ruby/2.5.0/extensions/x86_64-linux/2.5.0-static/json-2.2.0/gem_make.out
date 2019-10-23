@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/json-2.2.0/ext/json
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-1jd2umn.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-j8h9ae.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/json-2.2.0/ext/json

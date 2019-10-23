@@ -24,11 +24,11 @@ class User < ApplicationRecord
   attachment :profile_image
 
   has_many :questions, dependent: :destroy
-  has_many :questions_scores, dependent: :destroy
-  has_many :questoin_comments, dependent: :destroy
+  has_many :question_scores, dependent: :destroy
+  has_many :question_comments, dependent: :destroy
 
   has_many :answers, dependent: :destroy
-  has_many :answers_scores, dependent: :destroy
+  has_many :answer_scores, dependent: :destroy
 
   has_many :examples, dependent: :destroy
   has_many :example_scores, dependent: :destroy

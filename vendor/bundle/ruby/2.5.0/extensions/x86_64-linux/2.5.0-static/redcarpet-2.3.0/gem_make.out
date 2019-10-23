@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/redcarpet-2.3.0/ext/redcarpet
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-13749-k68bi5.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-6y7fv2.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/redcarpet-2.3.0/ext/redcarpet
@@ -57,4 +57,4 @@ linking shared-object redcarpet.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/redcarpet-2.3.0/ext/redcarpet
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 redcarpet.so ./.gem.20191019-13749-6ib1gk
+/usr/bin/install -c -m 0755 redcarpet.so ./.gem.20191023-10257-w1i5lf

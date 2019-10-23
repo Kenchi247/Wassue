@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.4/ext/nokogiri
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-qga6kx.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-jb1i0q.rb extconf.rb
 checking if the C compiler accepts ... yes
 Building nokogiri using packaged libraries.
 Using mini_portile version 2.4.0
@@ -142,4 +142,4 @@ rm -rf /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.4/ports
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.4/ext/nokogiri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nokogiri.so ./.gem.20191019-14952-6g5j9h/nokogiri
+/usr/bin/install -c -m 0755 nokogiri.so ./.gem.20191023-10257-7y0tlb/nokogiri

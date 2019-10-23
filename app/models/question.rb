@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
 
   has_many :question_scores, dependent: :destroy
-  has_many :questoin_comments, dependent: :destroy
+  has_many :question_comments, dependent: :destroy
 
 
 

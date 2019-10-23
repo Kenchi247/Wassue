@@ -1,5 +1,5 @@
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/sassc-2.2.1/ext
-/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191019-14952-16c5mc0.rb extconf.rb
+/home/ec2-user/.rbenv/versions/2.5.5/bin/ruby -r ./siteconf20191023-10257-o0ka0y.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/sassc-2.2.1/ext
@@ -72,4 +72,4 @@ linking shared-object sassc/libsass.so
 
 current directory: /var/www/html/wassue/vendor/bundle/ruby/2.5.0/gems/sassc-2.2.1/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 libsass.so ./.gem.20191019-14952-ky2bty/sassc
+/usr/bin/install -c -m 0755 libsass.so ./.gem.20191023-10257-1p66e1t/sassc
