@@ -1,16 +1,18 @@
+<style>
+  .rank {
+    background-color: black;
+    color: white;
+    margin-bottom: 0px;
+    height: 40px;
+    padding-top: 8px;
+  }
+</style>
 <table class="table table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"></th>
-        <th></th>
-        <th>ユーザーランキング</th>
-      </tr>
-    </thead>
 
     <tbody>
+      <h5 class="text-center rank">ユーザーランキング</h5>
       <% n = 1 %>
       <% rank_user.each do |user| %>
-
       <tr>
         <th scope="row" class="text-center"><i class="fas fa-crown" id="rank<%= n %>"></i><br><%= n %></th>
         <td>

@@ -51,7 +51,7 @@
 
       <ul class="nav nav-tabs">
 
-      	<li class="col-lg-1"><a href="#question" data-toggle="tab">
+      	<li class="col-lg-1"><a href="#question" class="active"data-toggle="tab">
           <button type="button" class="btn btn-primary">
             質問
           </button></a>
@@ -74,7 +74,7 @@
 
       <div class="tab-content">
 
-      	<div class="tab-pane" id="question">
+      	<div class="tab-pane show active" id="question">
           <%= render 'users/question', questions:@questions, user:@user %>
       	</div>
 
