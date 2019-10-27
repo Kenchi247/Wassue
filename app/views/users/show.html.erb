@@ -3,12 +3,12 @@
 
     <div class="col-lg-3 col-lg-offset-1">
 
-      <% if user.profile_image_id != nil %>
-        <%= attachment_image_tag user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %>
-      <% elsif user.profile_image_id == nil && user.provider != nil %>
-        <%= user.image %>
+      <% if @user.profile_image_id != nil %>
+        <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %>
+      <% elsif @user.profile_image_id == nil && @user.image != nil %>
+        <img src="<%= @user.image %>" width="200" height="200">
       <% else %>
-        <%= attachment_image_tag user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %>
+        <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %>
       <% end %>
 
         <br>

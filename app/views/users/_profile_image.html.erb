@@ -1,7 +1,7 @@
 <% if user.profile_image_id != nil %>
   <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
-<% elsif user.profile_image_id == nil && user.provider != nil %>
-  <%= user.image %>
+<% elsif user.profile_image_id == nil && user.image != nil %>
+  <img src="<%= user.image %>"  width="50" height="50">
 <% else %>
   <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
 <% end %>
