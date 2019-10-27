@@ -34,7 +34,7 @@
   <div class="row" id="content">
     <% user = User.find_by(id: @example.user_id) %>
     <div class="col-lg-1 offset-lg-9">
-      <%= attachment_image_tag @user, :profile_image, size:"50x50", fallback:"no_image.jpg", class:"rounded-circle" %><br>
+      <%= render 'users/profile_image', user:@user %><br>
     </div>
 
     <div class="col-lg-1">

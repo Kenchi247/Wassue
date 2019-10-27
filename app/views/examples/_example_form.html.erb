@@ -1,0 +1,75 @@
+<style>
+  #editor {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+  }
+  .card {
+    margin-left: 50px;
+    width: 100%;
+    height: 100%;
+  }
+  #example_content, #example_example_answer{
+    height: 50%;
+    width: 100%;
+  }
+</style>
+
+<script type="text/javascript">
+
+  window.onload = function() {
+    new Vue({
+      el: '#editor',
+        data: {
+          input: '<%==j example.example_content %>',
+        },
+        filters: {
+          marked: marked,
+        },
+    });
+  };
+
+</script>
+
+
+<div class="container-fulid">
+
+    <%= form_with model: example, local: true  do |form| %>
+      <%= render 'layouts/error_messages', model: form.object %>
+
+        <div class="row">
+          <div class="offset-1">
+            <h3>タイトル</h3>
+            <%= form.text_field :example_title, placeholder:"タイトルを入力", size:"60" %>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div id='editor'>
+            <div class="col-5 offset-1">
+              <%= form.text_area :example_content,size:"30x13", id: "example_content", "v-model" => "input", name: "example[example_content]",
+              value:"```ruby\nソースコード\n```\n#### 補足（FW/ツールのバージョンなど）\nここに書いてください" %>
+
+              <%= form.text_area :example_answer,size:"30x13", placeholder:"回答を入力してください" %>
+            </div>
+
+            <div class="col-5">
+              <div v-html='input | marked' class="card card-body bg-light" ></div>
+            </div>
+
+
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-2 offset-8 text-right">
+          <%  url = request.path_info %>
+          <% if url.include?('new') %>
+            <%= form.submit "問題を作成する", class: 'btn btn-success'  %>
+          <% else %>
+            <%= form.submit "問題を更新する", class: 'btn btn-success'  %>
+          <% end %>
+          </div>
+        </div>
+
+      <% end %>

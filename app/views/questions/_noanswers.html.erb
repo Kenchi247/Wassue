@@ -42,7 +42,7 @@
               <% else %>
                 <div class="col-4 text-right">
                   <br>
-                  <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+                  <%= render 'users/profile_image', user:user %>
                   <%= link_to user_path(user.id) do %>
                     <%= user.name %><br>
                   <% end %>
@@ -54,7 +54,7 @@
             <% else %>
               <div class="col-4 text-right">
                 <br>
-                <%= attachment_image_tag user, :profile_image, size:"50x50", class:"rounded", fallback: "no_image.jpg" %>
+                <%= render 'users/profile_image', user:user %>
                 <%= link_to user_path(user.id) do %>
                   <%= user.name %><br>
                 <% end %>
