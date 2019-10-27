@@ -1,7 +1,6 @@
 <style>
   .login-header {
     padding: 50px;
-
   }
   .login {
     background-color: white;
@@ -11,6 +10,13 @@
   body {
     background-color:#2a3644;
   }
+  .container {
+    max-width: 700px;
+  }
+  .btn-primary {
+    margin-top: 10px;
+  }
+</style>
 </style>
 <div class="container">
   <div class="login text-center">
@@ -18,11 +24,11 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"Email" %>
       </div><br>
 
       <div class="field">
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder:"Passward" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -33,10 +39,22 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "ログイン" %>　
-        <%= render "devise/shared/links" %>
-      </div>
+        <%= f.submit "ログイン", class:"btn btn-primary btn-sm" %>
+        <%= link_to "新規登録", new_registration_path(resource_name), class:"btn btn-primary btn-sm" %><br />
+      </div><br><br>
     <% end %>
+    <div class="row">
+      <div class="col-2 offset-4">
+        <%= link_to user_github_omniauth_callback_path do %>
+          <button type="button" class="btn btn-outline-secondary btn-sm"><%= octicon "mark-github" %>　github</button>
+        <% end %>
+      </div>
+      <div class="col-2">
+        <%= link_to user_twitter_omniauth_callback_path do %>
+          <button type="button" class="btn btn-outline-primary btn-sm"><i class="fab fa-twitter"></i>　twitter</button>
+        <% end %>
+      </div>
+    </div>
 
 
   </div>

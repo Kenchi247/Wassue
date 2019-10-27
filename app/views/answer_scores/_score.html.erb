@@ -1,5 +1,5 @@
 <% answer_scores = AnswerScore.where(answer_id: answer.id) %>
-<% answer_score = AnswerScore.find_by(user_id: answer.user_id, answer_id: answer.id) %>
+<% answer_score = AnswerScore.find_by(user_id: current_user.id, answer_id: answer.id) %>
 
 
 <% if answer.user_id == current_user.id || answer.user_id == question.user_id || question.question_status == "解決済"  %>

@@ -1,0 +1,46 @@
+  <div class="row">
+    <div class="col-3 offset-1">
+      <%= link_to questions_path do %>
+        <h2 class="page-title"><i class="far fa-gem"></i>Wassue</h2>
+      <% end %>
+    </div>
+    <div class="col-3">
+      <%= form_with url:questions_path, method: :get, local: true do |form| %>
+        <%= form.text_field :search %>
+        <%= form.submit '検索', :name => nil %>
+      <% end %>
+    </div>
+
+      <% if user_signed_in? %>
+        <% if current_user.admin == true %>
+          <%= link_to "管理ページ", rails_admin_path %>
+        <% else %>
+          <div class="col-1">
+            <%= link_to  user_path(current_user) do %>
+              <i class="fas fa-home"></i>　マイページ
+            <% end %>
+            </div>
+          <div class="col-1">
+            <%= link_to new_question_path, data: {"turbolinks" => false} do %>
+              <i class="fas fa-question-circle"></i>　質問する
+            <% end %>
+          </div>
+          <div class="col-2 text-left">
+            <%= link_to  new_example_path, data: {"turbolinks" => false} do %>
+              <i class="far fa-gem"></i>　問題を作成する
+            <% end %>
+          </div>
+
+        <% end %>
+      <% else %>
+        <div class="col-2">
+          <%= link_to new_user_session_path do %>
+            <i class="fas fa-sign-in-alt"></i>　ログイン
+          <% end %>
+        </div>
+        <%= link_to  new_user_registration_path do %>
+          <i class="fas fa-user-plus"></i>　新規登録
+        <% end %>
+      <% end %>
+
+  </div>

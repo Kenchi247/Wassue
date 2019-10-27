@@ -1,17 +1,15 @@
 
 <div class="container-fulid">
   <div class="main">
-    <div class="main-content">
-      <h2>回答して理解を深めよう！<%= link_to "twitter", user_twitter_omniauth_authorize_path %><br><br><br>
+      <p>回答して理解を深めよう！<br><br><br>
           質問して問題を解決しよう！！！　　　　<%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %><br><br><br>
           問題を作ってして評価を得よう！！　　　<%= link_to "作成する" ,new_example_path, data: {"turbolinks" => false} %>
 
-      </h2>
-    </div>
+      </p>
   </div>
 </div>
 <% notice %>
-<div class="container-fulid">
+<div class="container-fulid" id="container">
   <div class="row">
     <div class="col-2 offset-1">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
