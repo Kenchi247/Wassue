@@ -35,6 +35,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_many :notifications, as: :recipient
+
   private
 
   def self.dummy_email(auth)

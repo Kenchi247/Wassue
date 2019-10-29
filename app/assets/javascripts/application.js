@@ -17,4 +17,4 @@
 //= require popper
 //= require bootstrap-sprockets
 
-Push.Permission.request();
+Notification.requestPermission().then(function (result) {})

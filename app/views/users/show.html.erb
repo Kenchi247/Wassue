@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row top">
 
-    <div class="col-lg-3 col-lg-offset-1">
+    <div class="col-3">
 
       <% if @user.profile_image_id != nil %>
         <%= attachment_image_tag @user, :profile_image, size:"200x200", class:"rounded", fallback: "no_image.jpg" %>
@@ -21,7 +21,7 @@
         <% end %>
     </div>
 
-      <div class="col-lg-8">
+      <div class="col-8 offset-1">
         <div class="card card-body bg-light p-5" style="height:200px;">
           <%= @user.introduction %>
         </div>
@@ -29,14 +29,14 @@
 
         <% if @user.id == current_user.id %>
         <div class="row">
-          <div class="col-lg-1 offset-lg-9">
+          <div class="col-1 offset-9">
             <%= link_to edit_user_registration_path(@user.id) do %>
               <button type="button" class="btn btn-primary">
                 編集
               </button>
             <% end %>
           </div>
-          <div class="col-lg-2">
+          <div class="col-2">
             <%= link_to destroy_user_session_path,method: :delete do %>
               <button type="button" class="btn btn-primary">
                 ログアウト
@@ -48,7 +48,7 @@
         <% end %>
       <% else %>
       </div>
-        <div class="col-lg-8">
+        <div class="col-8">
           <div class="card card-body bg-light p-5" style="height:200px;">
             <%= @user.introduction %>
           </div>
@@ -60,19 +60,19 @@
 
       <ul class="nav nav-tabs">
 
-      	<li class="col-lg-1"><a href="#question" class="active"data-toggle="tab">
+      	<li class="col-1"><a href="#question" class="active"data-toggle="tab">
           <button type="button" class="btn btn-primary">
             質問
           </button></a>
         </li>
 
-      	<li class="col-lg-1"><a href="#answer" data-toggle="tab">
+      	<li class="col-1"><a href="#answer" data-toggle="tab">
             <button type="button" class="btn btn-primary">
               回答
             </button></a>
         </li>
 
-      	<li class="col-lg-1"><a href="#example" data-toggle="tab">
+      	<li class="col-1"><a href="#example" data-toggle="tab">
           <button type="button" class="btn btn-primary">
             問題
           </button></a>

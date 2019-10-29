@@ -71,7 +71,6 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 
 gem 'json'
-gem 'mysql2'
 gem 'listen', '>= 3.0.5', '< 3.2'
 
 
