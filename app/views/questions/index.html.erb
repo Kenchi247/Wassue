@@ -1,11 +1,21 @@
-
+<style>
+  .btn-outline-secondary {
+    font-size: calc(112.5% + 0.5vw);
+    position: absolute;
+    left: 40%;
+    bottom: 30%;
+    font-family: 'KodomoRounded';
+    src: font-url('KodomoRounded.otf');
+    font-weight: bolder;
+  }
+</style>
 <div class="container-fulid">
   <div class="main">
       <p>回答して理解を深めよう！<br><br><br>
-          質問して問題を解決しよう！！！　　　　<%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %><br><br><br>
-          問題を作ってして評価を得よう！！　　　<%= link_to "作成する" ,new_example_path, data: {"turbolinks" => false} %>
-
+          質問して問題を解決しよう！！　　　　　<%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %><br><br><br>
+          問題を作ってして評価を得よう！!！　　　<%= link_to "作成する" ,new_example_path, data: {"turbolinks" => false} %><br><br><br>
       </p>
+      <%= link_to "このページについて", about_path, class:"btn btn-outline-secondary rounded-0" %>
   </div>
 </div>
 <% notice %>

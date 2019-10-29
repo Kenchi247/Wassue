@@ -4,14 +4,14 @@ class ExampleScoresController < ApplicationController
   def create
     example_score = ExampleScore.new(example_id: @example.id, user_id: current_user.id)
     example_score.save
-    score = @user.score += 3
+    score = @user.score += 5
     @user.update(score: score)
   end
 
   def destroy
     example_score = ExampleScore.find_by(example_id: @example.id, user_id: current_user.id)
     example_score.destroy
-    score = @user.score -= 3
+    score = @user.score -= 5
     @user.update(score: score)
   end
   private

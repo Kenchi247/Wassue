@@ -15,6 +15,8 @@ class ExamplesController < ApplicationController
     @example = Example.new(example_params)
     @example.user_id = current_user.id
     if @example.save
+      score = current_user.score += 3
+      current_user.update(score: score)
       redirect_to user_path(current_user.id)
     else
       render :new
