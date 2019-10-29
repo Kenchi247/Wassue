@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:update, :edit, :create, :new]
   before_action :set_twitter_client, only: [:create]
+
+  def about
+  end
+
   def new
     @question = Question.new
   end
