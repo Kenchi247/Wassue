@@ -16,7 +16,7 @@
   
   
 サーバー環境   
-AWS　EC2  
+AWS  
 
 データベース  
 MySQL  
