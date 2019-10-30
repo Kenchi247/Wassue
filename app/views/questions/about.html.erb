@@ -1,0 +1,99 @@
+<style>
+  .scrollspy {
+  position: relative;
+  height: 800px;
+  overflow: auto;
+}
+.container, .scrollspy, .navbar{
+  margin-top: 100px;
+}
+p {
+  margin-bottom: 100px;
+}
+main {
+  font-size: 1.5rem;
+}
+font, i {
+  color:black;
+}
+</style>
+
+
+<div class="container">
+  <h1><strong><font face='Great Vibes, cursive'>Wassue</font></strong></h1>
+  <div class="row">
+    <div class="col-8">
+
+      <div data-spy="scroll" data-target="#navbar-example3" data-offset="0" class="scrollspy">
+        <h4 id="item-1"><strong><u>It was issue</u></strong></h4>
+        <p>
+          このサイトはみんなで助け合い問題を解決しようと言う意味が込められ、<br>
+          プログラミングの質問&&回答&&練習問題ができる学習支援サイトになっています。<br>
+          また質問が投稿されるとこちらのアカウントでツイートしていますので、
+          ぜひフォローしてください。
+          <a href="https://twitter.com/wassue_">
+           <button type="button" class="btn btn-light btn-sm">
+            <i class="fab fa-twitter"></i>@wassue_
+           </button>
+          </a>
+        </p>
+
+        <h5 id="item-1-1"><strong><u>質問の仕方について</u></strong></h5>
+        <p><strong>良い質問は回答が得られやすくなります。</strong><br>
+        質問者が何がわからないかを明確に記載する事で回答者は質問者が何を求めているのか素早く理解し、<br>
+        回答までの道のりが短くなり、結果問題の解決策を素早く得る事になります。<br>
+        また当サイトはMarkdown記法を採用しています。<br>
+        <a style="color:blue;" data-toggle="modal" data-target="#about">
+          Mardown記法について>>>
+         </a><br>
+        <strong><%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %></strong>
+       </p><%= render 'layouts/about' %>
+
+        <h4 id="item-2"><strong><u>score</u></strong></h4>
+        <p><strong>能力の可視化</strong>
+          スコアがあなたのプログラミング能力の指標になります。<br>
+          スコアは以下によって加算または減算されます。<br><br>
+          質問の仕方が評価される・・・＋１<br>
+          回答する・・・＋２<br>
+          回答が評価される・・・＋２<br>
+          回答が低評価される・・・ー２<br>
+          <strong>ベストアンサーに選ばれる・・・＋５<br>
+          例題を作成する・・・＋３<br>
+          例題が評価される・・・＋５<br></strong>
+        </p>
+        <h4 id="item-3"><strong><u>例題作成</u></strong></h4>
+        <p><strong>プログラミングを勉強するにはやはりアウトプットする事が大事</strong><br>
+          例題・練習問題を作成・回答する事によりアウトプットの機会を増やし,<br>
+          このサイトと一緒にプログラミング初学者を応援しませんか？？<br>
+          <strong><%= link_to "作成する" ,new_example_path, data: {"turbolinks" => false} %></strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="col-3 text-center">
+
+      <nav id="navbar-example3" class="navbar navbar-light bg-light">
+        <small>wassueへようこそ</small>
+        <nav class="nav nav-pills flex-column">
+          <a class="nav-link active" href="#item-1">It was issue</a>
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link ml-3 my-1" href="#item-1-1">質問の仕方について</a>
+          </nav>
+          <a class="nav-link" href="#item-2">スコアについて</a>
+          <a class="nav-link" href="#item-3">例題について</a>
+        </nav>
+      </nav><br>
+      <%= link_to "登録する" ,new_user_registration_path, class:"btn btn-success btn-lg" %><br><br>
+
+      <%= link_to user_github_omniauth_authorize_path do %>
+        <button type="button" class="btn btn-outline-secondary"><%= octicon "mark-github" %>　github</button><br>
+      <% end %><br>
+
+      <%= link_to user_twitter_omniauth_authorize_path do %>
+        <button type="button" class="btn btn-outline-primary"><i class="fab fa-twitter"></i>　twitter</button>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

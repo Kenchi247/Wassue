@@ -1,5 +1,5 @@
   <div class="row">
-    <div class="col-3 offset-1">
+    <div class="col-2 offset-1">
       <%= link_to questions_path do %>
         <h2 class="page-title"><i class="far fa-gem"></i>Wassue</h2>
       <% end %>
@@ -15,12 +15,12 @@
         <% if current_user.admin == true %>
           <%= link_to "管理ページ", rails_admin_path %>
         <% else %>
-          <div class="col-1">
+          <div class="col-2">
             <%= link_to  user_path(current_user) do %>
               <i class="fas fa-home"></i>　マイページ
             <% end %>
             </div>
-          <div class="col-1">
+          <div class="col-2">
             <%= link_to new_question_path, data: {"turbolinks" => false} do %>
               <i class="fas fa-question-circle"></i>　質問する
             <% end %>

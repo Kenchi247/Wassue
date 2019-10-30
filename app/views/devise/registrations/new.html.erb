@@ -15,7 +15,7 @@
     max-width: 700px;
   }
 
-  .btn-primary {
+  .btn-primary, .btn-success {
     margin-top: 10px;
   }
 
@@ -46,14 +46,18 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder:"もう一度passwordを入力してください", size:"50" %>
       </div><br>
       <div class="row">
-        <div class="col-2 offset-4">
+        <div class="col-2 offset-3">
           <%= f.submit "登録する", class:"btn btn-primary btn-sm" %>
         </div>
-
-        <div class="col-2">
-          <%= link_to "ログイン", new_session_path(resource_name), class:"btn btn-primary btn-sm" %>
-        </div>
-      </div><br><br>
+	
+	<div class="col-2">
+	  <%= link_to "戻る", :back, class:"btn btn-primary btn-sm" %>
+	</div>
+	
+          <div class="col-2">
+            <%= link_to "ログイン", new_session_path(resource_name), class:"btn btn-success btn-sm" %>
+          </div>
+       </div><br><br>
 
           <h5 class="text-center">SNSアカウントで登録</h5><br>
 
