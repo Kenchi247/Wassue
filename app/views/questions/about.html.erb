@@ -43,9 +43,9 @@ font, i {
         質問者が何がわからないかを明確に記載する事で回答者は質問者が何を求めているのか素早く理解し、<br>
         回答までの道のりが短くなり、結果問題の解決策を素早く得る事になります。<br>
         また当サイトはMarkdown記法を採用しています。<br>
-        <a style="color:blue;" data-toggle="modal" data-target="#about">
-          Mardown記法について>>>
-         </a><br>
+	 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#about">
+            Mardown記法について
+         </button><br>
         <strong><%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %></strong>
        </p><%= render 'layouts/about' %>
 
@@ -77,7 +77,7 @@ font, i {
         <nav class="nav nav-pills flex-column">
           <a class="nav-link active" href="#item-1">It was issue</a>
           <nav class="nav nav-pills flex-column">
-            <a class="nav-link ml-3 my-1" href="#item-1-1">質問の仕方について</a>
+            <a class="nav-link ml-3 my-1" href="#item-1-1">質問について</a>
           </nav>
           <a class="nav-link" href="#item-2">スコアについて</a>
           <a class="nav-link" href="#item-3">例題について</a>
