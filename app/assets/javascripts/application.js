@@ -17,4 +17,10 @@
 //= require popper
 //= require bootstrap-sprockets
 
-Notification.requestPermission().then(function (result) {})
+OneSignal.push(function() {
+  // Occurs when the user's subscription changes to a new value.
+  OneSignal.on('subscriptionChange', function (isSubscribed) {
+    console.log("The user's subscription state is now:", isSubscribed);
+  });
+});
+

@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user_id = current_user.id
     if @question.save
-       @twitter.update("新しい質問があります!\n[#{@question.title}]\n   http://www.wassue.site/questions/#{@question.id}")
+       @twitter.update("新しい質問があります!\n[#{@question.title}]\n   https://www.wassue.site/questions/#{@question.id}")
        redirect_to questions_path
     else
        render :new

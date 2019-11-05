@@ -5,7 +5,7 @@
     <div class="row border-bottom border-info">
 
       <% answer = Answer.where(question_id: t.id) %>
-        <div class="col-lg-1 text-center">
+        <div class="col-1 text-center">
           <% if t.question_status == "未回答" %>
             <h5><span class="badge badge-pill badge-warning">未回答</span></h5>
           <% elsif t.question_status == "受付中" %>
@@ -17,7 +17,7 @@
           <h4><%= answer.count %></h4>
         </div>
 
-        <div class="col-lg-7">
+        <div class="col-7">
           <%= link_to question_path(t.id), class:"text-secondary" do %>
             <h3><%= t.title %></h3>
           <% end %>
@@ -25,7 +25,7 @@
 
         <% if user_signed_in? %>
           <% if user.id == current_user.id %>
-            <div class="col-lg-4 text-right">
+            <div class="col-4 text-right">
               <%= link_to  edit_question_path(t.id), data: {"turbolinks" => false} do %>
                <button type="button" class="btn btn-primary">
                  編集
@@ -37,7 +37,7 @@
             </div>
 
           <% else %>
-            <div class="col-lg-4 text-right">
+            <div class="col-4 text-right">
               <br>
               <%= render 'users/profile_image', user:user %>
               <%= link_to user_path(user.id) do %>
@@ -49,7 +49,7 @@
             </div>
           <% end %>
         <% else %>
-          <div class="col-lg-4 text-right">
+          <div class="col-4 text-right">
             <br>
             <%= render 'users/profile_image', user:user %>
             <%= link_to user_path(user.id) do %>
