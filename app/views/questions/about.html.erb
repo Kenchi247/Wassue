@@ -28,14 +28,27 @@ font, i {
         <h4 id="item-1"><strong><u>It was issue</u></strong></h4>
         <p>
           このサイトはみんなで助け合い問題を解決しようと言う意味が込められ、<br>
-          プログラミングの質問&&回答&&練習問題ができる学習支援サイトになっています。
+          プログラミングの質問&&回答&&練習問題ができる学習支援サイトになっています。<br>
+          また質問が投稿されるとこちらのアカウントでツイートしていますので、
+          ぜひフォローしてください。
+          <a href="https://twitter.com/wassue_">
+           <button type="button" class="btn btn-light btn-sm">
+            <i class="fab fa-twitter"></i>@wassue_
+           </button>
+          </a>
         </p>
 
         <h5 id="item-1-1"><strong><u>質問の仕方について</u></strong></h5>
         <p><strong>良い質問は回答が得られやすくなります。</strong><br>
         質問者が何がわからないかを明確に記載する事で回答者は質問者が何を求めているのか素早く理解し、<br>
         回答までの道のりが短くなり、結果問題の解決策を素早く得る事になります。<br>
-        <strong><%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %></strong></p>
+        また当サイトはMarkdown記法を採用しています。<br>
+        <a style="color:blue;" data-toggle="modal" data-target="#about">
+          Mardown記法について>>>
+         </a><br>
+        <strong><%= link_to "質問する" ,new_question_path, data: {"turbolinks" => false} %></strong>
+       </p><%= render 'layouts/about' %>
+
 
         <h4 id="item-2"><strong><u>score</u></strong></h4>
         <p><strong>能力の可視化</strong>
@@ -84,3 +97,4 @@ font, i {
     </div>
   </div>
 </div>
+
