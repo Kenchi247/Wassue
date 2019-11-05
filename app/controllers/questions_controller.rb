@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
+    NotificationChannel.broadcast_to(current_user, title:'New things!',body:'All the news fit to print')
     @questions = Question.page(params[:page]).search(params[:search]).reverse_order
     @noanswers = Question.where(question_status: "未回答").page(params[:page]).reverse_order
     @unsolved = Question.where(question_status: "受付中").page(params[:page]).reverse_order
