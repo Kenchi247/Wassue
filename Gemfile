@@ -77,7 +77,7 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
-gem 'redcarpet', '~> 2.3.0'
+gem 'redcarpet', '~> 3.5.1'
 gem 'coderay'
 
 gem 'octicons_helper'
